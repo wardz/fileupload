@@ -1,0 +1,27 @@
+
+// Fonts
+@import url('http://fonts.googleapis.com/icon?family=Material+Icons');
+
+// Materialize
+@import "materialize";
+
+/* Sticky footer */
+body {
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
+}
+main {
+	margin-top: 2%;
+	flex: 1 0 auto;
+}
+
+@media (min-width:993px) {
+	nav .nav-wrapper {
+		margin-left: 15%
+	}
+}
+
+.nav-left-align {
+	margin-left: 10rem;
+}
