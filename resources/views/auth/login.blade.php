@@ -11,7 +11,7 @@
             <div class="row">
                 <div class="input-field col s6">
                     <i class="material-icons prefix">email</i>
-                    <input type="email" class="validate {!! $errors->first('email') ? 'invalid' : 'valid' !!}" id="email" name="email" value="{{ old('email') }}" required autofocus>
+                    <input type="email" class="validate" id="email" name="email" value="{{ old('email') }}" required autofocus>
                     <label for="email" data-error="{!! $errors->first('email') !!}">E-Mail Address</label>
                 </div>
             </div>
@@ -19,7 +19,7 @@
             <div class="row">
                 <div class="input-field col s6">
                     <i class="material-icons prefix">lock</i>
-                    <input type="password" class="validate {!! $errors->first('password') ? 'invalid' : 'valid' !!}" name="password" id="password" required>
+                    <input type="password" class="validate" name="password" id="password" required>
                     <label for="password" data-error="{!! $errors->first('password') !!}">Password</label>
                 </div>
             </div>

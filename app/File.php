@@ -4,21 +4,19 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class AddonFile extends Model
+class File extends Model
 {
-	public $table = "addonfile";
-
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'file',
-        'version',
-        'changelog',
-        'path',
-        'size',
-        'addon_id'
+        'file_name',
+        'file_path',
+        'file_version',
+        'file_changelog',
+        'file_mime',
+        'file_size',
     ];
 }

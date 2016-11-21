@@ -13,6 +13,4 @@
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
-
-Route::resource('addons', 'AddonUploadController');
+Route::resource('project', 'ProjectController');

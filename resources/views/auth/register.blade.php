@@ -11,7 +11,7 @@
             <div class="row">
                 <div class="input-field col s6">
                     <i class="material-icons prefix">email</i>
-                    <input type="email" class="validate {!! $errors->first('email') ? 'invalid' : 'valid' !!}" name="email" id="email" value="{{ old('email') }}" required>
+                    <input type="email" class="validate" name="email" id="email" value="{{ old('email') }}" required>
                     <label for="email" data-error="{!! $errors->first('email') !!}">E-Mail Address</label>
                 </div>
             </div>
@@ -19,7 +19,7 @@
             <div class="row">
                 <div class="input-field col s6">
                     <i class="material-icons prefix">lock</i>
-                    <input id="password" type="password" class="validate {!! $errors->first('password') ? 'invalid' : 'valid' !!}" name="password" required>
+                    <input id="password" type="password" class="validate" name="password" required>
                     <label for="password" data-error="{!! $errors->first('password') !!}">Password</label>
                 </div>
             </div>
@@ -27,7 +27,7 @@
             <div class="row">
                 <div class="input-field col s6">
                     <i class="material-icons prefix">lock</i>
-                    <input id="password-confirm" type="password" class="validate {!! $errors->first('password_confirmation') ? 'invalid' : 'valid' !!}" name="password_confirmation" required>
+                    <input id="password-confirm" type="password" class="validate" name="password_confirmation" required>
                     <label for="password-confirm" data-error="{!! $errors->first('password_confirmation') !!}">Confirm Password</label>
                 </div>
             </div>

@@ -3,8 +3,9 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Foundation\Auth\User;
 
-use App\Addon;
-use App\AddonFile;
+use App\Project;
+use App\File;
+use App\Tag;
 
 class DatabaseSeeder extends Seeder
 {
@@ -25,10 +26,9 @@ class DatabaseSeeder extends Seeder
             'role_id' => 3
         ));
 
-        $addon1 = Addon::create(array(
-            'name' => 'addon1',
-            'description' => 'addon1 description 10 characters.',
-            'category_id' => 1,
+        $project1 = Project::create(array(
+            'name' => 'Project 1',
+            'description' => 'Project description 10 characters.',
             'user_id' => $user1->id
         ));
 
@@ -38,11 +38,14 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('guest')
         ));
 
-        $addon2 = Addon::create(array(
-            'name' => 'addon2',
-            'description' => 'addon2 description 10 characters.',
-            'category_id' => 1,
+        $project2 = Project::create(array(
+            'name' => 'Project 2',
+            'description' => 'Project description 10 characters.',
             'user_id' => $user2->id
         ));
+
+        Tag::create(array('name' => 'Work'));
+        Tag::create(array('name' => 'Cooking'));
+        Tag::create(array('name' => 'Coding'));
     }
 }

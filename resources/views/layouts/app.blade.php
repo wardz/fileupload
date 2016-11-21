@@ -18,13 +18,6 @@
     <link href="/css/app.css" rel="stylesheet" media="all">
 
     <link href="favicon.ico" rel="icon" type="image/png">
-
-    <!-- Scripts -->
-    <script>
-        window.Laravel = <?php echo json_encode([
-            'csrfToken' => csrf_token(),
-        ]); ?>
-    </script>
 </head>
 <body>
     @include('layouts.nav')
@@ -36,5 +29,10 @@
     @include('layouts.footer')
 
     <script src="/js/app.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+    <script>
+        // temp place
+        $('#select_tag').material_select();
+    </script>
 </body>
 </html>

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAddonTable extends Migration
+class CreateProjectsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,14 @@ class CreateAddonTable extends Migration
      */
     public function up()
     {
-        Schema::create('addon', function (Blueprint $table) {
-            // Addon
+        Schema::create('projects', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 32)->unique();
-            $table->string('author', 20)->default('Unknown');
-            $table->string('license', 50)->default('Unknown');
+            $table->string('license', 50)->default('All rights reserved.');
             $table->text('description');
-            //$table->string('img_path', 100)->nullable();
-            $table->integer('category_id')->unsigned();
-            $table->integer('user_id')->unsigned();
+            $table->integer('downloads')->unsigned()->default(0);   
             $table->tinyInteger('public')->unsigned()->default(0);
-            $table->integer('downloads')->unsigned()->default(0);     
+            $table->integer('user_id')->unsigned();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
@@ -38,6 +34,6 @@ class CreateAddonTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('addon');
+        Schema::dropIfExists('projects');
     }
 }

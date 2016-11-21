@@ -15,8 +15,8 @@ class AdminOnly
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    /*public function handle($request, Closure $next)
     {
         return ($request->user()->is_admin) ? $next($request) : redirect('/');
-    }
+    }*/
 }

@@ -9,11 +9,6 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    const ROLE_BANNED = 0;
-    const ROLE_GUEST = 1;
-    const ROLE_MOD = 2;
-    const ROLE_ADMIN = 3;
-
     /**
      * The attributes that are mass assignable.
      *
@@ -32,13 +27,14 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function getIsAdminAttribute()
+    /**
+     * Get hasMany relationship for Addon model.
+     * 
+     * @example User::addons()->find($id)
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function projects()
     {
-        return $this->role_id == User::ROLE_ADMIN;
-    }
-
-    public function addons()
-    {
-        return $this->hasMany('App\Addon');
+        return $this->hasMany('App\Project');
     }
 }
