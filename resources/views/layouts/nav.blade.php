@@ -4,6 +4,7 @@
         <li><a href="{{ url('/login') }}">@lang('layouts/nav.login')</a></li>
         <li><a href="{{ url('/register') }}">@lang('layouts/nav.register')</a></li>
     @else
+        <li><a href="#">Settings</a></li>
         <li>
             <a href="{{ url('/logout') }}"
                 onclick="event.preventDefault();
@@ -23,15 +24,12 @@
         <a href="{{ url('/') }}" class="brand-logo">
             {!! config('app.name', 'Laravel') !!}
         </a>
-        <a href="#!" data-activates="mobile-demo" class="button-collapse">
+        <a href="#mobile-demo" data-activates="mobile-demo" class="button-collapse">
             <i class="material-icons">menu</i>
         </a>
         
         <ul class="hide-on-med-and-down nav-left-align">
-            <li><a href="#">Some</a></li>
-            <li><a href="#">Random</a></li>
-            <li><a href="#">Pages</a></li>
-            
+            @include('layouts.menu')
             <li>
                 <a class="dropdown-button" href="#!" data-activates="dropdown1">
                     {{ Auth::guest() ? trans('layouts/nav.account') : Auth::user()->name }}
@@ -41,10 +39,7 @@
         </ul>
 
         <ul class="side-nav" id="mobile-demo">
-            <li><a href="sass.html">Sass</a></li>
-            <li><a href="badges.html">Components</a></li>
-            <li><a href="collapsible.html">Javascript</a></li>
-            <li><a href="mobile.html">Mobile</a></li>
+            @include('layouts.menu')
         </ul>
     </div>
 </nav>

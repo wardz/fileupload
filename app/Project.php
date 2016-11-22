@@ -44,12 +44,11 @@ class Project extends Model
     /**
      * Get relationship for File model.
      * 
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function files()
     {
-        // TODO hasMany
-        return $this->hasOne('App\File');
+        return $this->hasMany('App\File');
     }
 
     /**

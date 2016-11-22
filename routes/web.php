@@ -14,3 +14,5 @@
 Auth::routes();
 
 Route::resource('project', 'ProjectController');
+
+Route::get('download/{id}', 'DownloadController@get');

@@ -33,6 +33,7 @@
     <script>
         // temp place
         $('#select_tag').material_select();
+        $(".button-collapse").sideNav();
     </script>
 </body>
 </html>

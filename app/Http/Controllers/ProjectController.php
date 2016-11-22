@@ -23,15 +23,6 @@ class ProjectController extends Controller
     }
 
     /**
-     * Show main view.
-     * @return Response
-     */
-    public function index()
-    {
-        return view('project.index');
-    }
-
-    /**
      * Show view for creating new project.
      * @return Response
      */
@@ -40,6 +31,12 @@ class ProjectController extends Controller
         $tags = Tag::pluck('name', 'id')->all();
 
         return view('project.create', compact('tags'));
+    }
+
+    public function index()
+    {
+        // list all user projects
+        return view('project.index');
     }
 
     /**
@@ -54,20 +51,9 @@ class ProjectController extends Controller
         return view('project.edit', compact('project'));
     }
 
-    // TODO move this to diff controller
-    // add project page instead here
     public function show(Project $project)
     {
-        $file = $project->files;
-        $path = storage_path() . '/app/' . $file->file_path;
-
-        // Flush any existing buffers to prevent file corruption
-        if (ob_get_level()) {
-            ob_end_clean();
-        }
-        
-        return response()->download($path, $file->file_name,
-            array('Content-Type: ' . $file->file_mime)); // TODO file_mime
+        return view('project.index', compact('project'));
     }
 
     /**
@@ -80,6 +66,7 @@ class ProjectController extends Controller
     public function update(ProjectFormRequest $request, Project $project)
     {
         $project->update($request->all());
+        $project->tags()->sync($project->id, $request->input('tag_list'));
 
         if ($request->hasFile('file')) {
             $project->files->file_path = $request->file('file')->store($request->user()->id);
