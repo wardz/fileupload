@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\DB;
 
 use App\User;
 
@@ -18,13 +19,14 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 20)->unique();
-            $table->string('email', 254)->unique();
-            $table->string('password', 61);
-            $table->tinyInteger('role_id')->unsigned()->default(1); //User::ROLE_GUEST
+            $table->string('email')->unique();
+            $table->string('password', 60);
+            
             $table->rememberToken();
             $table->timestamps();
-            // TODO ip address, confirmed, last_login
         });
+
+        DB::statement('ALTER TABLE `users` ADD `ip_address` VARBINARY(16)');
     }
 
     /**

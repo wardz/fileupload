@@ -16,13 +16,12 @@ class CreateFilesTable extends Migration
         Schema::create('files', function (Blueprint $table) {
             $table->increments('id');
             $table->string('file_name', 50)->index();
-            $table->string('file_path', 257)->unique();
+            $table->string('file_path')->unique();
             $table->string('file_version', 20);
             $table->string('file_mime', 127);
             $table->text('file_changelog');
             $table->integer('file_size')->unsigned();
             $table->integer('file_downloads')->unsigned()->default(0);
-            $table->tinyInteger('file_public')->unsigned()->default(0);
             $table->integer('project_id')->unsigned();
             $table->timestamps();
 
