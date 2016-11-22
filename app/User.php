@@ -37,4 +37,14 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Project');
     }
+
+    public function getIpAddressAttribute($value)
+    {
+        return inet_ntop($value);
+    }
+
+    public function setIpAddressAttribute($value)
+    {
+        $this->attributes['ip_address'] = inet_pton($value);
+    }
 }
