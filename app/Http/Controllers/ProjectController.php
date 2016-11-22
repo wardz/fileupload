@@ -9,7 +9,7 @@ use Storage; // needed?
 
 use App\Project;
 use App\File;
-use App\tag;
+use App\Tag;
 
 class ProjectController extends Controller
 {

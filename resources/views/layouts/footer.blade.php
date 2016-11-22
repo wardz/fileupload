@@ -11,7 +11,7 @@
                 <ul>
                     <li>
                         <i class="tiny material-icons">question_answer</i>
-                        <a class="grey-text text-lighten-3" href="#!">Support</a>
+                        <a class="grey-text text-lighten-3" href="#!">Contact</a>
                     </li>
                     <li>
                         <i class="tiny material-icons">info</i>
@@ -31,19 +31,9 @@
     </div>
 
     <div class="footer-copyright">
-        <!-- Dropdown Structure -->
-        <ul id="dropdown_language" class="dropdown-content">
-            @foreach ($languages as $lang)
-                <li><a href="{!! url($lang['url']) !!}">{!! $lang['name'] !!}</a></li>
-            @endforeach
-        </ul>
-
         <div class="container">
             © {!! date('Y') . ' ' . config('app.name', 'Laravel') !!}
-            <a class="dropdown-button grey-text text-lighten-4 right" href="#!"
-                data-activates="dropdown_language">@lang('layouts/footer.language')
-                <i class="material-icons">arrow_drop_down</i>
-            </a>
+            <a class="grey-text text-lighten-4 right" href="#!">Some random text</a>
         </div>
     </div>
 </footer>

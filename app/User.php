@@ -28,7 +28,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get hasMany relationship for Addon model.
+     * Get hasMany relationship for project model.
      * 
      * @example User::addons()->find($id)
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
