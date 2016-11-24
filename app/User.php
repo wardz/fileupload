@@ -38,6 +38,16 @@ class User extends Authenticatable
         return $this->hasMany('App\Project');
     }
 
+    public function permissions()
+    {
+        return $this->hasOne('App\Permission');
+    }
+
+    public function hasRole($type)
+    {
+        return $this->permissions()->where('role_id', '=', $type)->first();
+    }
+
     public function getIpAddressAttribute($value)
     {
         return inet_ntop($value);

@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Foundation\Auth\User;
-use Storage;
 
 use App\Project;
 use App\File;

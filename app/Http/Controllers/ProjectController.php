@@ -20,6 +20,7 @@ class ProjectController extends Controller
     {
     	$this->middleware('auth');
         $this->middleware('throttle:10,1');
+        //$this->middleware('role:3');
     }
 
     /**
@@ -33,7 +34,7 @@ class ProjectController extends Controller
         return view('project.create', compact('tags'));
     }
 
-    public function index()
+    public function index(Request $request)
     {
         // list all user projects
         return view('project.index');
@@ -51,7 +52,7 @@ class ProjectController extends Controller
         return view('project.edit', compact('project'));
     }
 
-    public function show(Project $project)
+    public function show(Project $project, Request $request)
     {
         return view('project.index', compact('project'));
     }
