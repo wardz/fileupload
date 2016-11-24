@@ -5,6 +5,8 @@ namespace App\Providers;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
+use App\Project;
+
 class RouteServiceProvider extends ServiceProvider
 {
     /**
@@ -25,8 +27,8 @@ class RouteServiceProvider extends ServiceProvider
     {
         parent::boot();
 
-        Route::bind('addons', function($id) {
-            return App\Addon::findOrFail($id);
+        Route::bind('project', function($name) {
+            return Project::where('name', '=', $name)->firstOrFail();
         });
     }
 

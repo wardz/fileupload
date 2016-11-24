@@ -36,5 +36,11 @@
 				@endforeach
 			</ul>
 		</div>
+
+		@foreach ($project->tag_list as $tag)
+			<div class="chip">
+				{{ $tag }}
+			</div>
+		@endforeach
 	</div>
 @endsection
