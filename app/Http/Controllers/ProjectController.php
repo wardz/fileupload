@@ -34,10 +34,10 @@ class ProjectController extends Controller
         return view('project.create', compact('tags'));
     }
 
-    public function index(Request $request)
+    public function index()
     {
-        // list all user projects
-        return view('project.index');
+        $projects = Project::userIsOwner()->get();
+        return view('project.index', compact('projects'));
     }
 
     /**
@@ -54,7 +54,7 @@ class ProjectController extends Controller
 
     public function show(Project $project, Request $request)
     {
-        return view('project.index', compact('project'));
+        return view('project.show', compact('project'));
     }
 
     /**
