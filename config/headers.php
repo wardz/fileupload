@@ -15,8 +15,13 @@ return [
 	'X-Content-Type-Options' => 'nosniff',
 	'X-Download-Options' => 'noopen',
 	'X-Frame-Options' => 'DENY',
-	'X-XSS-Protection' => '1; mode=block',
 	'Access-Control-Allow-Origin' => 'false',
+    'Referrer-Policy' => 'strict-origin',
+
+    // Note that mode=block is a security risk in IE8, but we only
+    // support IE10+ anyways
+    'X-XSS-Protection' => '1; mode=block',
+
 	'X-Powered-By' => 'REMOVE', // Delete existing header
 
 	/*
