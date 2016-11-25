@@ -6573,4 +6573,7 @@ main {
 .nav-left-align {
   margin-left: 10rem; }
 
+a {
+  color: inherit; }
+
 /*# sourceMappingURL=app.css.map */

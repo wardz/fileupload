@@ -36,7 +36,7 @@ class ProjectController extends Controller
 
     public function index()
     {
-        $projects = Project::userIsOwner()->get();
+        $projects = Project::userIsOwner()->paginate(8);
         return view('project.index', compact('projects'));
     }
 
@@ -49,7 +49,9 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return view('project.edit', compact('project'));
+        $tags = Tag::pluck('name', 'id')->all();
+
+        return view('project.edit', compact('project', 'tags'));
     }
 
     public function show(Project $project, Request $request)
