@@ -4,8 +4,9 @@
 <div class="container">
 	<div class="row">
 		{!! Form::model($project, [
-			'method' => 'PATCH', 'files' => true,
-			'action' => ['ProjectController@update', $project->id],
+			'method' => 'PATCH',
+			'files' => true,
+			'action' => ['ProjectController@update', $project->name],
 			'class' => 'col s12'
 		]) !!}
 

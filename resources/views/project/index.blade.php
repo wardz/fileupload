@@ -3,26 +3,36 @@
 @section('content')
 	<div class="container">
 		<div class="row">
+			<h3>Your projects</h3>
+			
+			<table class="bordered highlight" style="cursor: pointer">
+				<thead>
+					<tr>
+						<th data-field="name" onclick="window.location = '{{ url('project?column=name') }}'">*Name</th>
+						<th data-field="tags">Tags</th>
+						<th data-field="date" onclick="window.location = '{{ url('project?column=updated_at') }}'">*Last change</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach($projects as $project)
+						<tr onclick="window.location = '{{ action('ProjectController@show', $project->name) }}'">
+							<td>
+								{{ $project->name }}
+							</td>
 
-			@foreach($projects as $project)
-				<div class="col s6">
-					<a href="{!! action('ProjectController@show', $project->name) !!}">
-						<div class="card small">
-							<div class="card-image">
-								<img src="http://static6.businessinsider.com/image/564372019dd7cc02308bdbfe-538/html-code.jpg">
-							</div>
+							<td>
+								@foreach ($project->tag_list as $tag)
+									<div class="chip">
+										{{ $tag }}
+									</div>
+								@endforeach
+							</td>
 
-							<div class="card-content">
-								<span class="card-title">{{ $project->name }}</span>
-							</div>
-
-							<div class="card-action">
-								<span>{{ $project->description }}</span>
-							</div>
-						</div>
-					</a>
-				</div>
-			@endforeach
+							<td>{{ $project->updated_at }}</td>
+						</tr>
+					@endforeach
+				</tbody>
+			</table>
 		</div>
 
 		{!! $projects->links() !!}

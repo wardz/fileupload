@@ -2,7 +2,15 @@
 
 @section('content')
 	<div class="container">
-		<div class="row">	
+		@if ($project->userOwned())
+			<div class="left	">
+				<a class="btn-floating btn-large waves-effect waves-light red" href="{{ action('ProjectController@edit', $project->name) }}">
+					<i class="material-icons">mode_edit</i>
+				</a>
+			</div>
+		@endif
+
+		<div class="row">
 			<div class="col s12 m7">
 				<div class="card large">
 					<div class="card-image">
@@ -10,7 +18,7 @@
 					</div>
 
 					<div class="card-content">
-						<span class="card-title">{{ $project->name }}</span>
+						<span class="card-title">{{ $project->name }}<small class="right">{{ $project->user->name }}</small></span>
 						<p>{{ $project->description }}</p>
 					</div>
 

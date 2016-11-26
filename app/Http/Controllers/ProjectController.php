@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProjectFormRequest;
 
-use Storage; // needed?
-
 use App\Project;
 use App\File;
 use App\Tag;
@@ -28,14 +26,20 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        $tags = Tag::pluck('name', 'id')->all()->remember(1);
+        $tags = Tag::remember(1)->pluck('name', 'id')->all();
 
         return view('project.create', compact('tags'));
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $projects = Project::userIsOwner()->paginate(8)->remember(1);
+        $column = $request->get('column');
+        if (!$column || $column !== 'name' || $column !== 'updated_at') {
+            $column = 'name';
+        }
+
+        $projects = Project::remember(1)->userIsOwner()->orderBy($column, 'desc')->paginate(8);
+        
         return view('project.index', compact('projects'));
     }
 
@@ -48,7 +52,7 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        $tags = Tag::pluck('name', 'id')->all()->remember(1);
+        $tags = Tag::remember(1)->pluck('name', 'id')->all();
 
         return view('project.edit', compact('project', 'tags'));
     }
@@ -68,15 +72,17 @@ class ProjectController extends Controller
     public function update(ProjectFormRequest $request, Project $project)
     {
         $project->update($request->all());
-        $project->tags()->sync($project->id, $request->input('tag_list'));
+        $project->tags()->sync($request->input('tag_list'));
 
         if ($request->hasFile('file')) {
-            $project->files->file_path = $request->file('file')->store($request->user()->id);
+            $request['file_path'] = $request->file('file')->store($request->user()->id);
+            $project->files()->save($request->all());
+        } else {
+            $file = $project->files->first();
+            $file->update($request->all());
         }
 
-        $project->files->update($request->all());
-
-        return view('project.index');
+        return redirect('project.index');
     }
 
     /**

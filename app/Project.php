@@ -2,6 +2,8 @@
 
 namespace App;
 
+use Auth;
+
 class Project extends Model
 {
     /**
@@ -22,7 +24,12 @@ class Project extends Model
      */
     public function scopeUserIsOwner($query)
     {
-        $query->where('user_id', '=', \Auth::user()->id);
+        $query->where('user_id', '=', \Auth::id());
+    }
+
+    public function userOwned()
+    {
+        return $this->user->id == Auth::id();
     }
 
     /**

@@ -16,14 +16,9 @@ class ProjectFormRequest extends FormRequest
     public function authorize()
     {
         if ($this->user()) {
-
-            if ($this->route('project')) {
-                if (!Project::findOrFail($this->route('project'))->userIsOwner()->remember(30)) {
-                    return false;
-                }
+            if ($this->route('project')->userOwned()) {
+                return true;
             }
-
-            return true;
         }
 
         return false;
@@ -49,7 +44,7 @@ class ProjectFormRequest extends FormRequest
 
         if ($this->isMethod('patch')) {
             // Prevent "Name is already taken" when updating project. (unique)
-            $rules['name'] = $rules['name'] . ',' . $this->route('addon');
+            $rules['name'] = $rules['name'] . ',' . $this->route('project')->id;
             
             // File is optional when updating a project
             $rules['file'] = str_replace('required|', '', $rules['file']);
