@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2390e9a81f75d54a05241fd065ff6c42",
-    "content-hash": "2c92fd5e3e1081f3521ab0e63ace7abf",
+    "hash": "a6b806c98a482012e26d93be89d4c226",
+    "content-hash": "2068403c5bb5c210773c27dd419f8cce",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -1972,6 +1972,54 @@
                 "environment"
             ],
             "time": "2016-09-01 10:05:43"
+        },
+        {
+            "name": "watson/rememberable",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dwightwatson/rememberable.git",
+                "reference": "7ab6978f8dfaea8864028128faea854440c7af81"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dwightwatson/rememberable/zipball/7ab6978f8dfaea8864028128faea854440c7af81",
+                "reference": "7ab6978f8dfaea8864028128faea854440c7af81",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "~5.0",
+                "illuminate/support": "~5.0",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "0.9.*",
+                "phpunit/phpunit": "4.2.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Watson\\Rememberable\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dwight Watson",
+                    "email": "dwight@studiousapp.com"
+                }
+            ],
+            "description": "Query caching for Laravel 5",
+            "keywords": [
+                "caching",
+                "eloquent",
+                "laravel",
+                "remember"
+            ],
+            "time": "2016-08-23 11:22:20"
         }
     ],
     "packages-dev": [

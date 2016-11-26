@@ -16,20 +16,6 @@ class ViewComposerServiceProvider extends ServiceProvider
         /*view()->composer('addon.form', function($view) {
             $view->with('files', Addon::all());
         });*/
-
-        // TODO move this array to config
-        view()->composer('layouts.footer', function($view) {
-            $view->with('languages', array(
-                [
-                    'url' => '/lang/en',
-                    'name' => 'English'
-                ],
-                [
-                    'url' => '/lang/no',
-                    'name' => 'Norwegian'
-                ]
-            ));
-        });
     }
 
     /**

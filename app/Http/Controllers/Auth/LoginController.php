@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 
+use Auth;
+
 class LoginController extends Controller
 {
     /*
@@ -56,6 +58,11 @@ class LoginController extends Controller
         ]);
     }
 
+   /* protected function storeUserIp($request)
+    {   
+        Auth::user()->update(['ip_address' => $request->ip()]);
+    }*/
+
     /**
      * Handle a login request to the application.
      * This function replaces AuthenticatesUsers login() function
@@ -78,6 +85,7 @@ class LoginController extends Controller
         }
 
         if ($this->attemptLogin($request)) {
+            //$this->storeUserIp($request);
             return $this->sendLoginResponse($request);
         }
 

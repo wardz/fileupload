@@ -1,47 +1,14 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Be right back.</title>
+@extends('layouts.app')
 
-        <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
+@section('title', '503')
 
-        <style>
-            html, body {
-                height: 100%;
-            }
-
-            body {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                color: #B0BEC5;
-                display: table;
-                font-weight: 100;
-                font-family: 'Lato', sans-serif;
-            }
-
-            .container {
-                text-align: center;
-                display: table-cell;
-                vertical-align: middle;
-            }
-
-            .content {
-                text-align: center;
-                display: inline-block;
-            }
-
-            .title {
-                font-size: 72px;
-                margin-bottom: 40px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <div class="content">
-                <div class="title">Be right back.</div>
-            </div>
-        </div>
-    </body>
-</html>
+@section('content')
+<div class="container">
+    <div class="row">
+        <h1>Service unavailable</h1>
+        <p class="flow-text">Sorry, our servers are currently overloaded or down for maintenance.<br>
+            Please give it a minute and try again.
+        </p>
+    </div>
+</div>
+@endsection

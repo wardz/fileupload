@@ -28,9 +28,8 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get hasMany relationship for project model.
+     * Get projects belonging to user.
      * 
-     * @example User::addons()->find($id)
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function projects()
@@ -38,11 +37,20 @@ class User extends Authenticatable
         return $this->hasMany('App\Project');
     }
 
+    /**
+     * Get user permission relation.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function permissions()
     {
         return $this->hasOne('App\Permission');
     }
 
+    /**
+     * Check if user has given role.
+     * @param  int  $type
+     */
     public function hasRole($type)
     {
         return $this->permissions()->where('role_id', '=', $type)->first();

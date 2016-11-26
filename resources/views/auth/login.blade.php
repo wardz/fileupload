@@ -5,8 +5,9 @@
 <div class="container">
     <div class="row">
         <h3>Authentication</h3>
-        <form class="col s12" role="form" method="POST" action="{{ url('/login') }}">
-            {{ csrf_field() }}
+
+        <form class="col s12" role="form" method="POST" action="{!! url('/login') !!}">
+            {!! csrf_field() !!}
 
             <div class="row">
                 <div class="input-field col s6">
@@ -26,10 +27,8 @@
 
             <div class="row">
                 <div class="col s6">
-                    <p>
-                        <input type="checkbox" name="remember" id="remember">
-                        <label for="remember">Remember me</label>
-                    </p>
+                    <input type="checkbox" name="remember" id="remember">
+                    <label for="remember">Remember me</label>
                 </div>
             </div>
 
@@ -37,8 +36,9 @@
                 <div class="col s6">
                     <label>Human verification
                         {!! Recaptcha::render() !!}
+
                         @if ($errors->has('g-recaptcha-response'))
-                            <b style="color:#F44336">{!! $errors->first('g-recaptcha-response') !!}</b>
+                            <strong class="red-text text-darken-1">{!! $errors->first('g-recaptcha-response') !!}</strong>
                         @endif
                     </label>
                 </div>
@@ -50,7 +50,7 @@
                         <i class="material-icons right">send</i>
                     </button>
 
-                    <a class="" href="{{ url('/password/reset') }}">
+                    <a href="{!! url('/password/reset') !!}">
                         Forgot Your Password?
                     </a>
                 </div>

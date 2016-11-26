@@ -18,7 +18,7 @@ class ProjectFormRequest extends FormRequest
         if ($this->user()) {
 
             if ($this->route('project')) {
-                if (!Project::findOrFail($this->route('project'))->userIsOwner()) {
+                if (!Project::findOrFail($this->route('project'))->userIsOwner()->remember(30)) {
                     return false;
                 }
             }

@@ -2,8 +2,6 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-
 class Project extends Model
 {
     /**
@@ -17,6 +15,11 @@ class Project extends Model
         'description',
     ];
 
+    /**
+     * Check if user is owner of project in query.
+     * 
+     * @param  [type] $query [description]
+     */
     public function scopeUserIsOwner($query)
     {
         $query->where('user_id', '=', \Auth::user()->id);
@@ -24,6 +27,7 @@ class Project extends Model
 
     /**
      * Get a list of tag ids associated with the current project.
+     * 
      * @return array
      */
     public function getTagListAttribute()

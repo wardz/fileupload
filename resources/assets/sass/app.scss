@@ -5,6 +5,8 @@
 // Materialize
 @import "materialize";
 
+@import "social";
+
 /* Sticky footer */
 body {
 	display: flex;
@@ -16,14 +18,16 @@ main {
 	flex: 1 0 auto;
 }
 
+/* Align nav to certain position */
 @media (min-width:993px) {
 	nav .nav-wrapper {
 		margin-left: 15%
 	}
 }
-
 .nav-left-align {
 	margin-left: 10rem;
 }
 
-a { color: inherit; } 
+a {
+	color: inherit;
+}

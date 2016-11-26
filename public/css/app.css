@@ -6552,6 +6552,23 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
   .picker--time .picker__box {
     margin-bottom: 5em; } }
 
+.social-icons {
+  background-image: url("../images/social-icons.png");
+  width: 48px;
+  height: 48px;
+  display: inline-block; }
+  .social-icons:hover {
+    cursor: pointer;
+    opacity: 0.80; }
+  .social-icons.google {
+    background-position: -176px -1px; }
+  .social-icons.facebook {
+    background-position: -234px -58px; }
+  .social-icons.twitter {
+    background-position: -176px -114px; }
+  .social-icons.github {
+    background-position: -236px -171px; }
+
 /* Sticky footer */
 body {
   display: -webkit-box;

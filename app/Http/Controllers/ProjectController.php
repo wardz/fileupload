@@ -20,7 +20,6 @@ class ProjectController extends Controller
     {
     	$this->middleware('auth');
         $this->middleware('throttle:10,1');
-        //$this->middleware('role:3');
     }
 
     /**
@@ -29,14 +28,14 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        $tags = Tag::pluck('name', 'id')->all();
+        $tags = Tag::pluck('name', 'id')->all()->remember(1);
 
         return view('project.create', compact('tags'));
     }
 
     public function index()
     {
-        $projects = Project::userIsOwner()->paginate(8);
+        $projects = Project::userIsOwner()->paginate(8)->remember(1);
         return view('project.index', compact('projects'));
     }
 
@@ -49,7 +48,7 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        $tags = Tag::pluck('name', 'id')->all();
+        $tags = Tag::pluck('name', 'id')->all()->remember(1);
 
         return view('project.edit', compact('project', 'tags'));
     }

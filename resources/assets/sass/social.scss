@@ -1,0 +1,27 @@
+.social-icons {
+	background-image: url('../images/social-icons.png');
+	width: 48px;
+	height: 48px;
+	display: inline-block;
+
+	&:hover {
+		cursor: pointer;
+		opacity: 0.80;
+	}
+
+	&.google {
+		background-position: -176px -1px; 
+	}
+
+	&.facebook {
+		background-position: -234px -58px; 
+	}
+
+	&.twitter {
+		background-position: -176px -114px; 
+	}
+
+	&.github {
+		background-position: -236px -171px; 
+	}
+}

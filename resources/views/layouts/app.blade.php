@@ -4,14 +4,17 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-   
-    <meta name="description" content="TODO">
+
+    <meta name="description" content="@yield('description')">
     <meta name="csrf-token" content="{!! csrf_token() !!}">
-    
-    <link href="favicon.ico" rel="icon" type="image/png">
-    <title>{!! config('app.name', 'Laravel') !!}</title>
+    <meta name="author" href="humans.txt">
+
+    <link href="favicon.png" rel="icon" type="image/png">
+    <title>{!! config('app.name', 'Laravel') !!} - @yield('title')</title>
 
     <!-- Prefetching -->
+    <link href="https://fonts.gstatic.com" rel="dns-prefetch">
+    <link href="https://fonts.gstatic.com" rel="preconnect">
     <link href="https://fonts.googleapis.com" rel="dns-prefetch">
     <link href="https://fonts.googleapis.com" rel="preconnect">
     <link href="https://cdnjs.cloudflare.com" rel="dns-prefetch">

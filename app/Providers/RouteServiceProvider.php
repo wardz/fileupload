@@ -28,7 +28,7 @@ class RouteServiceProvider extends ServiceProvider
         parent::boot();
 
         Route::bind('project', function($name) {
-            return Project::where('name', '=', $name)->firstOrFail();
+            return Project::where('name', '=', $name)->remember(30)->firstOrFail();
         });
     }
 

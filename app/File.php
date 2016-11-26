@@ -2,8 +2,6 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-
 class File extends Model
 {
     /**
@@ -17,29 +15,35 @@ class File extends Model
         'file_version',
         'file_changelog',
         'file_mime',
-        'file_size',
+        'file_size'
     ];
 
+    /** 
+     * Mutate file_size to return formatted human-readable size. E.g 1024 to 1 kB.
+     * http://stackoverflow.com/questions/5501427/php-filesize-mb-kb-conversion
+     *
+     * @param int $bytes
+     * @return string
+     */
     public function getFileSizeAttribute($bytes)
     {        
-        // http://stackoverflow.com/questions/5501427/php-filesize-mb-kb-conversion
         if ($bytes >= 1073741824) {
-            $bytes = number_format($bytes / 1073741824, 2) . ' GB';
+            return number_format($bytes / 1073741824, 2) . ' GB';
         } elseif ($bytes >= 1048576) {
-            $bytes = number_format($bytes / 1048576, 2) . ' MB';
+            return number_format($bytes / 1048576, 2) . ' MB';
         } elseif ($bytes >= 1024) {
-            $bytes = number_format($bytes / 1024, 2) . ' kB';
-        } elseif ($bytes > 1) {
-            $bytes = $bytes . ' bytes';
-        } elseif ($bytes == 1) {
-            $bytes = $bytes . ' byte';
+            return number_format($bytes / 1024, 2) . ' kB';
+        } elseif ($bytes >= 1) {
+            return $bytes . ' bytes';
         } else {
-            $bytes = '0 bytes';
+            return '~0 bytes';
         }
-
-        return $bytes;
     }
 
+    /**
+     * Get projects that are associated with file.
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function projects()
     {
         return $this->belongsToMany('App\Project');

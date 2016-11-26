@@ -5,8 +5,8 @@
     <div class="row">
         <h3>Registration</h3>
         
-        <form class="col s12" role="form" method="POST" action="{{ url('/register') }}">
-            {{ csrf_field() }}
+        <form class="col s12" role="form" method="POST" action="{!! url('/register') !!}">
+            {!! csrf_field() !!}
 
             <div class="row">
                 <div class="input-field col s6">
@@ -36,8 +36,9 @@
                 <div class="col s6">
                     <label>Human verification
                         {!! Recaptcha::render() !!}
+                        
                         @if ($errors->has('g-recaptcha-response'))
-                            <b style="color:#F44336">{!! $errors->first('g-recaptcha-response') !!}</b>
+                            <strong class="red-text text-darken-1">{!! $errors->first('g-recaptcha-response') !!}</strong>
                         @endif
                     </label>
                 </div>
