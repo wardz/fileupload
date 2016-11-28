@@ -44,16 +44,7 @@ class User extends Authenticatable
      */
     public function permissions()
     {
-        return $this->hasOne('App\Permission');
-    }
-
-    /**
-     * Check if user has given role.
-     * @param  int  $type
-     */
-    public function hasRole($type)
-    {
-        return $this->permissions()->where('role_id', '=', $type)->first();
+        return $this->hasOne('App\Permission', 'user_id');
     }
 
     public function getIpAddressAttribute($value)

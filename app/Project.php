@@ -24,20 +24,43 @@ class Project extends Model
      */
     public function scopeUserIsOwner($query)
     {
-        $query->where('user_id', '=', \Auth::id());
+        $query->where('user_id', '=', Auth::id());
     }
 
     public function userOwned()
     {
-        return $this->user->id == Auth::id();
+        if (Auth::user()->permissions->role_id === 3) {
+            return true;
+        }
+
+        return $this->user->id === Auth::id();
     }
 
+    public function getSlug()
+    {
+        return str_slug($this->name);
+    }
+
+    public function getImageAttribute() {
+        // return $this->image ? $this->image : config('project.stockimg');
+        return config('project.stockimg');
+    }
     /**
      * Get a list of tag ids associated with the current project.
      * 
      * @return array
      */
     public function getTagListAttribute()
+    {
+        return $this->tags->pluck('id')->all();
+    }
+
+    /**
+     * Get a list of tag names associated with the current project.
+     * 
+     * @return array
+     */
+    public function getTagListNameAttribute()
     {
         return $this->tags->pluck('name')->all();
     }

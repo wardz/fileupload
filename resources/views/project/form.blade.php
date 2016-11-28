@@ -14,7 +14,7 @@
 
 <div class="row">
 	<div class="input-field col s6">
-		{!! Form::select('tag_list[]', $tags, null, [
+		{!! Form::select('tag_list[]', $tags, isset($project) ? $project->tagList : null, [
 			'class' => 'validate',
 			'id' => 'select_tag',
 			'multiple'
@@ -41,14 +41,14 @@
 
 <div class="row">
 	<div class="input-field col s6">
-		{!! Form::text('file_version', null, ['class' => 'validate', 'id' => 'file_version', 'placeholder' => 'v1...']) !!}
+		{!! Form::text('file_version', isset($project) ? $project->files->first()->file_version : null, ['class' => 'validate', 'id' => 'file_version', 'placeholder' => 'v1...']) !!}
 		<label for="file_version" data-error="{!! $errors->first('file_version') !!}">Version</label>
 	</div>
 </div>
 
 <div class="row">
 	<div class="input-field col s6">
-		{!! Form::textarea('file_changelog', null, [
+		{!! Form::textarea('file_changelog', isset($project) ? $project->files->first()->file_changelog : null, [
 			'class' => 'materialize-textarea validate',
 			'id' => 'file_changelog',
 			'placeholder' => 'ipsum dolor sit amet consectetur.'
@@ -67,7 +67,7 @@
 		</div>
 
 		<div class="file-path-wrapper">
-			<input class="file-path validate" id="file" type="text">
+			<input class="file-path validate" id="file" type="text" value="{{ isset($project) ? $project->files->first()->file_name : null }}">
 		</div>
 	</div>
 

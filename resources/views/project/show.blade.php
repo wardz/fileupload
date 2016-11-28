@@ -1,10 +1,13 @@
 @extends('layouts.app')
 
+@section('title', $project->name)
+@section('description', $project->description)
+
 @section('content')
 	<div class="container">
 		@if ($project->userOwned())
-			<div class="left	">
-				<a class="btn-floating btn-large waves-effect waves-light red" href="{{ action('ProjectController@edit', $project->name) }}">
+			<div class="left">
+				<a class="btn-floating btn-large waves-effect waves-light red" href="{{ action('ProjectController@edit', $project->getSlug()) }}">
 					<i class="material-icons">mode_edit</i>
 				</a>
 			</div>
@@ -14,7 +17,7 @@
 			<div class="col s12 m7">
 				<div class="card large">
 					<div class="card-image">
-						<img src="http://static6.businessinsider.com/image/564372019dd7cc02308bdbfe-538/html-code.jpg">
+						<img src="{{ $project->image }}">
 					</div>
 
 					<div class="card-content">
@@ -29,20 +32,24 @@
 				</div>
 			</div>
 
-			<ul class="collection col s12 m4">
-				@foreach ($project->files->all() as $file)
-					<li class="collection-item avatar">
-						<a href="{!! action('DownloadController@get', $file->id) !!}">
-							<i class="material-icons circle">folder</i>
-							<span class="title">{{ $file->file_name }}</span>
-							<p>{{ $file->file_version }}
-							<br>
-							{{ $file->file_size }}
-							</p>
-						</a>
-					</li>
-				@endforeach
-			</ul>
+			@if ($project->files->first())
+				<ul class="collection col s12 m4">
+					@foreach ($project->files->all() as $file)
+						<li class="collection-item avatar">
+							<a href="{!! action('DownloadController@get', $file->id) !!}">
+								<i class="material-icons circle">folder</i>
+								<span class="title">{{ $file->file_name }}</span>
+								<p>{{ $file->file_version }}
+								<br>
+								{{ $file->file_size }}
+								</p>
+							</a>
+						</li>
+					@endforeach
+				</ul>
+			@else
+				<p class="text-grey text-darken-4">No files uploaded</p>
+			@endif
 		</div>
 
 		@foreach ($project->tag_list as $tag)

@@ -6583,6 +6583,7 @@ main {
   -webkit-box-flex: 1;
   flex: 1 0 auto; }
 
+/* Align nav to certain position */
 @media (min-width: 993px) {
   nav .nav-wrapper {
     margin-left: 15%; } }
@@ -6592,5 +6593,3 @@ main {
 
 a {
   color: inherit; }
-
-/*# sourceMappingURL=app.css.map */

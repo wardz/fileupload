@@ -68,7 +68,51 @@
 /* 0 */
 /***/ function(module, exports) {
 
-eval("/*window.$ = window.jQuery = require('jquery');\r\nwindow.hammerjs = require('hammerjs');*/\r\n\r\n$(function() {\r\n    $('#select_tag').material_select();\r\n    $(\".button-collapse\").sideNav();\r\n\r\n\tfunction validate() {\r\n\t\tvar id = $(this).attr('id');\r\n\t\tvar $label = $('label[for=\"' + id + '\"]');\r\n\r\n\t\tif ($label && $label.data('error')) {\r\n\t\t\t$(this).addClass('invalid');\r\n\t\t}\r\n\t}\r\n\r\n\t//$('.validate').on('keypress', validate);\r\n\t$('.validate').each(validate);\r\n});//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMC5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy9yZXNvdXJjZXMvYXNzZXRzL2pzL2FwcC5qcz84YjY3Il0sInNvdXJjZXNDb250ZW50IjpbIi8qd2luZG93LiQgPSB3aW5kb3cualF1ZXJ5ID0gcmVxdWlyZSgnanF1ZXJ5Jyk7XHJcbndpbmRvdy5oYW1tZXJqcyA9IHJlcXVpcmUoJ2hhbW1lcmpzJyk7Ki9cclxuXHJcbiQoZnVuY3Rpb24oKSB7XHJcbiAgICAkKCcjc2VsZWN0X3RhZycpLm1hdGVyaWFsX3NlbGVjdCgpO1xyXG4gICAgJChcIi5idXR0b24tY29sbGFwc2VcIikuc2lkZU5hdigpO1xyXG5cclxuXHRmdW5jdGlvbiB2YWxpZGF0ZSgpIHtcclxuXHRcdHZhciBpZCA9ICQodGhpcykuYXR0cignaWQnKTtcclxuXHRcdHZhciAkbGFiZWwgPSAkKCdsYWJlbFtmb3I9XCInICsgaWQgKyAnXCJdJyk7XHJcblxyXG5cdFx0aWYgKCRsYWJlbCAmJiAkbGFiZWwuZGF0YSgnZXJyb3InKSkge1xyXG5cdFx0XHQkKHRoaXMpLmFkZENsYXNzKCdpbnZhbGlkJyk7XHJcblx0XHR9XHJcblx0fVxyXG5cclxuXHQvLyQoJy52YWxpZGF0ZScpLm9uKCdrZXlwcmVzcycsIHZhbGlkYXRlKTtcclxuXHQkKCcudmFsaWRhdGUnKS5lYWNoKHZhbGlkYXRlKTtcclxufSk7XG5cblxuLy8gV0VCUEFDSyBGT09URVIgLy9cbi8vIHJlc291cmNlcy9hc3NldHMvanMvYXBwLmpzIl0sIm1hcHBpbmdzIjoiQUFBQTs7O0FBR0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7Iiwic291cmNlUm9vdCI6IiJ9");
+$(function() {
+	// Initialize materialize elements
+    $('#select_tag').material_select();
+    $(".button-collapse").sideNav();
+
+	$.ajaxSetup({
+		headers: {
+			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		}
+	});
+
+    // Check if any inputs are invalid on page load
+	function validate() {
+		var id = $(this).attr('id');
+		var $label = $('label[for="' + id + '"]');
+
+		if ($label && $label.data('error')) {
+			$(this).addClass('invalid');
+		}
+	}
+	$('.validate').each(validate);
+
+	// Logout POST
+	$('#logout_anchor').on('click', function(event) {
+		event.preventDefault();
+
+		$.ajax({
+			url: '/logout',
+			type: 'POST'
+		}).always(function(response) {
+			window.location.replace(window.location.host + '/');
+		});
+	});
+
+	$(document).on('click', 'a.jquery-postback', function(event) {
+		event.preventDefault();
+
+		$.ajax({
+			url: $(this).data('href'),
+			type: $(this).data('method')
+		}).done(function(response, textStatus, xhr) {
+			console.log(textStatus, xhr);
+		});
+	});
+});
 
 /***/ }
 /******/ ]);

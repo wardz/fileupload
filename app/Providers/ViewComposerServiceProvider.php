@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
+use App\Tag;
+
 class ViewComposerServiceProvider extends ServiceProvider
 {
     /**
@@ -13,8 +15,12 @@ class ViewComposerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        /*view()->composer('addon.form', function($view) {
-            $view->with('files', Addon::all());
+        view()->composer('project.form', function($view) {
+            $view->with('tags', Tag::remember(10)->pluck('name', 'id')->all());
+        });
+
+        /*view()->composer('project.index', function($view) {
+            $view->with('projects', Tag::remember(10)->pluck('name', 'id')->all());
         });*/
     }
 

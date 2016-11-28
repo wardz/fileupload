@@ -25,14 +25,19 @@
 </head>
 <body>
     @include('layouts.nav')
-    
+
     <main>
         @yield('content')
     </main>
 
     @include('layouts.footer')
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <!--[if gte IE 10]><!-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <!--<![endif]-->
+    <!--[if lte IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <![endif]-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
     <script src="/js/app.js"></script>
 </body>

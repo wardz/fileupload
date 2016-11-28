@@ -4,18 +4,8 @@
         <li><a href="{!! url('/login') !!}">Login</a></li>
         <li><a href="{!! url('/register') !!}">Register</a></li>
     @else
-        <li><a href="#">Settings</a></li>
-        <li>
-            <a href="{!! url('/logout') !!}"
-                onclick="event.preventDefault();
-                    document.getElementById('logout-form').submit();">
-                Logout
-            </a>
-
-            <form id="logout-form" action="{!! url('/logout') !!}" method="POST" style="display: none;">
-                {!! csrf_field() !!}
-            </form>
-        </li>
+        <li><a href="{!! url('/settings') !!}">Settings</a></li>
+        <li><a href="{!! url('/logout') !!}" id="logout_anchor">Logout</a></li>
     @endif
 </ul>
 

@@ -4,10 +4,15 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-
-// middleware('role:guest')
 class Role
 {
+    protected $roles = [
+        'banned' => 0,
+        'default' => 1,
+        'moderator' => 2,
+        'admin' => 3,
+    ];
+
     /**
      * Handle an incoming request.
      *
@@ -17,6 +22,10 @@ class Role
      */
     public function handle($request, Closure $next, $roleType)
     {
-        return ($request->user()->hasRole($roleType)) ? $next($request) : redirect('/');
+        if ($roleType !== 'owner') {
+            return ($request->user()->hasRole($this->roles[$roleType])) ? $next($request) : redirect('/');
+        } else {
+            return $request->project->userOwned() ? $next($request) : redirect('/');
+        }
     }
 }
