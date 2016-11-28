@@ -33,15 +33,14 @@ class File extends Model
             return number_format($bytes / 1048576, 2) . ' MB';
         } elseif ($bytes >= 1024) {
             return number_format($bytes / 1024, 2) . ' kB';
-        } elseif ($bytes >= 1) {
-            return $bytes . ' bytes';
         } else {
-            return '~0 bytes';
+            return $bytes . ' bytes';
         }
     }
 
     /**
      * Get projects that are associated with file.
+     *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function projects()

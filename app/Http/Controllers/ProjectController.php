@@ -17,7 +17,7 @@ class ProjectController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('throttle:10,1');
+        $this->middleware('throttle:10,1', ['except' => ['show']]);
     	$this->middleware('auth', ['except' => ['show']]);
         $this->middleware('role:owner', ['only' => ['edit']]);
     }
@@ -127,6 +127,12 @@ class ProjectController extends Controller
         return redirect('project');
     }
 
+    /**
+     * Delete existing project.
+     *
+     * @param ProjectFormRequest $request
+     * @return Response
+     */
     public function destroy(Project $project)
     {
         foreach ($project->files as $file) {

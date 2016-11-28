@@ -10,12 +10,12 @@ class Tag extends Model
      * @var array
      */
     protected $fillable = [
-        'project_id',
-        'tag_id',
+        'project_id', 'tag_id',
     ];
 
 	/**
 	 * Get projects associated with the given tag.
+     *
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
 	 */
     public function projects()

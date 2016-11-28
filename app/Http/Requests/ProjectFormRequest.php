@@ -34,7 +34,7 @@ class ProjectFormRequest extends FormRequest
         $rules = [
             'name'          => 'required|string|max:32|min:3|unique:projects,name',
             'license'       => 'string|max:50|min:2',
-            'tag_list'      => 'required|array', // tag_list[] ?
+            'tag_list'      => 'required|array',
             'description'   => 'required|string|max:999|min:10',
 
             'file'              => 'required|file|mimes:zip|max:102400|min:1',
@@ -44,7 +44,7 @@ class ProjectFormRequest extends FormRequest
 
         if ($this->isMethod('patch')) {
             // Prevent "Name is already taken" when updating project. (unique)
-            $rules['name'] = $rules['name'] . ',' . $this->route('project')->id;
+            $rules['name'] +=  ',' . $this->route('project')->id;
             
             // File is optional when updating a project
             $rules['file'] = str_replace('required|', '', $rules['file']);

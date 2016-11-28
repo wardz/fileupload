@@ -15,6 +15,7 @@ class ViewComposerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        // Make sure form view always has $tags
         view()->composer('project.form', function($view) {
             $view->with('tags', Tag::remember(10)->pluck('name', 'id')->all());
         });

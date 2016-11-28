@@ -7,17 +7,25 @@ use Closure;
 class Headers
 {
     /**
-     * Handle an incoming request.
+     * Load headers on middleware created.
+     */
+    public function __construct() {
+        $this->headers = config('headers');
+    }
+
+    /**
+     * Set headers for response.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
-     * @return mixed
+     * @param  bool $cacheOff
+     * @return \Illuminate\Http\Response
      */
     public function handle($request, Closure $next, $cacheOff)
     {
         $response = $next($request);
 
-        foreach (config('headers') as $key => $value) {
+        foreach ($this->headers as $key => $value) {
             if ($value !== 'REMOVE') {
                 $response->header($key, $value);
             } else {

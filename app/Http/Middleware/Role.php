@@ -6,6 +6,7 @@ use Closure;
 
 class Role
 {
+    // TODO set in config
     protected $roles = [
         'banned' => 0,
         'default' => 1,
