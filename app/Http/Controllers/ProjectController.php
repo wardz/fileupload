@@ -70,12 +70,14 @@ class ProjectController extends Controller
 
     /**
      * Helper function for storing file locally.
+     * 
      * @param  ProjectFormRequest $request
+     * @param int $id
      * @return string|null
      */
-    public function storeFileLocal($request)
+    public function storeFileLocal($request, $id)
     {
-        return $request->file('file')->store($request->user()->id);
+        return $request->file('file')->store($id);
     }
 
     /**
@@ -93,7 +95,7 @@ class ProjectController extends Controller
         if ($request->hasFile('file')) {
             // Create new file to project
             $file = new File($request->all());
-            $file->file_path = $this->storeFileLocal($request);
+            $file->file_path = $this->storeFileLocal($request, $project->id);
             $project->files()->save($file);
         } else {
             // Update latest existing file
@@ -121,7 +123,7 @@ class ProjectController extends Controller
 
         // Store file
         $file = new File($request->all());
-        $file->file_path = $this->storeFileLocal($request);
+        $file->file_path = $this->storeFileLocal($request, $project->id);
         $project->files()->save($file);
 
         return redirect('project');

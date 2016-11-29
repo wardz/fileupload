@@ -52,9 +52,10 @@ $factory->define(App\Project::class, function (Faker\Generator $faker) {
 });
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(App\File::class, function (Faker\Generator $faker) {
+$factory->define(App\File::class, function (Faker\Generator $faker, $args) {
+    $id = $args['project_id'];
     $name = $faker->unique()->word . '.zip';
-    Storage::put($name, 'test');
+    Storage::put($id . '/' . $name, 'test');
 
     return [
         'file_name' => $name,

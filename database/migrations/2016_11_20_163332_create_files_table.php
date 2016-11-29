@@ -37,5 +37,32 @@ class CreateFilesTable extends Migration
     public function down()
     {
         Schema::dropIfExists('files');
+        
+        self::rrmdir(storage_path() . '/app/files/');
+        mkdir(storage_path() . '/app/files/', 0755);
+    }
+
+    /**
+     * Recursively delete non-empty directory.
+     * http://php.net/manual/en/function.rmdir.php#98622
+     * 
+     * @param  string $dir
+     */
+    public function rrmdir($dir) {
+        if (is_dir($dir)) {
+            $objects = scandir($dir);
+            foreach ($objects as $object) {
+                if ($object != "." && $object != "..") {
+                    if (filetype($dir."/".$object) == "dir") {
+                        self::rrmdir($dir."/".$object);
+                    } else {
+                        unlink($dir."/".$object);
+                    }
+                }
+            }
+
+            reset($objects); 
+            rmdir($dir);
+        }
     }
 }
