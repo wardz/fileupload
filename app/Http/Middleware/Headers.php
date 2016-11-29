@@ -6,6 +6,20 @@ use Closure;
 
 class Headers
 {
+    protected $headers;
+
+    /**
+     * The URIs that should have cache off.
+     *
+     * @var array
+     */
+    protected $except = [
+        'login',
+        'register',
+        'password',
+        'password/reset',
+    ];
+
     /**
      * Load headers on middleware created.
      */
@@ -21,9 +35,10 @@ class Headers
      * @param  bool $cacheOff
      * @return \Illuminate\Http\Response
      */
-    public function handle($request, Closure $next, $cacheOff)
+    public function handle($request, Closure $next, $cacheOff = false)
     {
         $response = $next($request);
+        $cacheOff = $cacheOff ? $cacheOff : isset($this->except[$request->path()]);
 
         foreach ($this->headers as $key => $value) {
             if ($value !== 'REMOVE') {
@@ -35,7 +50,7 @@ class Headers
 
         if ($cacheOff) {
             $response->header('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
-            $response->header('X-Robots-Tag', 'none');
+            $response->header('X-Robots-Tag', 'noindex, nofollow');
         }
 
         return $response;

@@ -19,7 +19,7 @@ return [
     'Referrer-Policy' => 'strict-origin',
 
     // Note that mode=block is a security risk in IE8, but we only
-    // support IE10+ anyways
+    // support IE9+ anyways
     'X-XSS-Protection' => '1; mode=block',
 
 	'X-Powered-By' => 'REMOVE', // Delete existing header

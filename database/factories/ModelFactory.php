@@ -1,6 +1,6 @@
 <?php
 
-use Storage;
+use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,10 +18,11 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     static $password;
 
     return [
-        'name' => $faker->name->unique(),
+        'name' => $faker->unique()->word,
         'email' => $faker->unique()->safeEmail,
         'password' => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(10),
+        'ip_address' => (rand(1, 4) > 2) ? $faker->ipv4 : $faker->ipv6,
     ];
 });
 
@@ -36,39 +37,33 @@ $factory->define(App\Permission::class, function (Faker\Generator $faker) {
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Tag::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->word->unique()
-    ];
-});
-
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define('ProjectTag', function (Faker\Generator $faker) {
-    return [
-        'tag_id' => $faker->numberBetween(0, 5)
-        // project_id
+        'name' => $faker->unique()->word
     ];
 });
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Project::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->word->unique(),
+        'name' => $faker->unique()->word,
         'description' => $faker->paragraph,
+        'downloads' => $faker->randomDigit
         // user_id
     ];
 });
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\File::class, function (Faker\Generator $faker) {
-	$name = $faker->word . '.zip';
-	$path = Storage::put($name, 'test');
+    $name = $faker->unique()->word . '.zip';
+    Storage::put($name, 'test');
 
     return [
         'file_name' => $name,
         'file_version' => 'v' . $faker->numberBetween(1, 9),
         'file_changelog' => $faker->paragraph,
         'file_mime' => 'application/zip',
-        'file_path' => $path,
+        'file_path' => Storage::url($name),
         'file_size' => $faker->numberBetween(1024, 10240),
+        'file_downloads' => $faker->randomDigit,
         // project_id
     ];
 });

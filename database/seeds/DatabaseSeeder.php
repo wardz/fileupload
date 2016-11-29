@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Foundation\Auth\User;
-use Faker;
 
 class DatabaseSeeder extends Seeder
 {
@@ -17,11 +16,24 @@ class DatabaseSeeder extends Seeder
 
         factory(App\User::class, 10)->create()->each(function($user) {
             $user->permissions()->save(factory(App\Permission::class)->make());
-            // permissions()->user()-> ?
             
-            $user->projects()->save(factory(App\Project::class)->make());
-            $user->projects()->tags()->save(factory('projectTag')->make());
-            $user->projects()->files()->save(factory(App\File::class)->make());
+            // Every user should have 1-5 projects
+
+            $project = $user->projects()->save(factory(App\Project::class)->make());
+            $project->files()->save(factory(App\File::class)->make());
+            $project->tags()->attach([
+                rand(1, 6), rand(1, 6), rand(1, 6)
+            ]);
         });
+
+        // Create an admin user for testing
+        $user = App\User::create([
+            'name' => 'admin',
+            'email' => 'admin@localhost.com',
+            'password' => bcrypt('admin'),
+        ]);
+        $user->permissions()->save(App\Permission::create([
+            'role_id' => 3, 'user_id' => $user->id,
+        ]));
     }
 }

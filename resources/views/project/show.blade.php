@@ -52,7 +52,7 @@
 			@endif
 		</div>
 
-		@foreach ($project->tag_list as $tag)
+		@foreach ($project->tag_list_name as $tag)
 			<div class="chip">
 				{{ $tag }}
 			</div>

@@ -21,7 +21,7 @@ class Role
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next, $roleType)
+    public function handle($request, Closure $next, $roleType = '')
     {
         if ($roleType !== 'owner') {
             return ($request->user()->hasRole($this->roles[$roleType])) ? $next($request) : redirect('/');
