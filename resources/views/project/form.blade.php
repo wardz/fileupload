@@ -14,6 +14,7 @@
 
 <div class="row">
 	<div class="input-field col s6">
+		
 		{!! Form::select('tag_list[]', $tags, isset($project) ? $project->tagList : null, [
 			'class' => 'validate',
 			'id' => 'select_tag',

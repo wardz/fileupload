@@ -51,6 +51,10 @@ class ExampleTest extends TestCase
             ->assertResponseOk()
             ->assertViewHas('project');
 
+        /*$this->actingAs($this->user)
+            ->visit($URL . '/nonexistingproject')
+            ->assertResponseStatus(404);*/
+
         $this->actingAs($this->user)
             ->visit($URL . '/test/edit')
             ->assertResponseOk()
@@ -71,6 +75,9 @@ class ExampleTest extends TestCase
             ->assertResponseOk()
             ->assertViewHas('project');
 
+        /*$this->visit($URL . '/nonexistingproject')
+            ->assertResponseStatus(404);*/
+
         $this->visit($URL . '/test/edit')
             ->seePageIs('/login');
     }
@@ -84,7 +91,7 @@ class ExampleTest extends TestCase
 
             ->type('Test project', 'name')
             ->type('MIT License', 'license')
-            ->check('testtag', 'tag_list[]')
+            ->select('1', 'tag_list[]')
             ->type('Test description 10 characters', 'description')
             ->type('v1', 'file_version')
             ->type('Test changelog 10 characters', 'file_changelog')
@@ -101,6 +108,15 @@ class ExampleTest extends TestCase
             'user_id' => $this->user->id
         ]);
 
-        // TODO tags + file
+        $project = $this->user->projects()->latest()->get()->first();
+        $file = $project->files()->latest()->get()->first();
+        $this->seeInDatabase('files', [
+            'file_name' => 'test.zip',
+            'file_version' => 'v1',
+            'file_changelog' => 'Test changelog 10 characters',
+            'file_size' => '1072',
+            'project_id' => $file->project_id
+            //'file_path' => ''
+        ]);
     }*/
 }
