@@ -33,7 +33,7 @@ class Project extends Model
     public function userOwned()
     {
         // Always return true if user is admin
-        if (Auth::user()->permissions->role_id === 3) { // TODO role_name
+        if (Auth::user() && Auth::user()->permissions->role_id === 3) { // TODO role_name
             return true;
         }
 

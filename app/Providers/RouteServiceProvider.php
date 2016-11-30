@@ -29,7 +29,7 @@ class RouteServiceProvider extends ServiceProvider
 
         // Find Project by name (slug)
         Route::bind('project', function($name) {
-            return Project::remember(30)->where('name', '=', str_slug($name, ' '))->firstOrFail();
+            return Project::remember(10)->where('name', '=', str_slug($name, ' '))->firstOrFail();
         });
 
         /*Route::filter('sortBy', function($route, $request, $values) {

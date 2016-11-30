@@ -37,6 +37,10 @@ class Headers
      */
     public function handle($request, Closure $next, $cacheOff = false)
     {
+        if (env('APP_ENV') === 'testing') {
+            return $next($request);
+        }
+
         $response = $next($request);
         $cacheOff = $cacheOff ? $cacheOff : isset($this->except[$request->path()]);
 

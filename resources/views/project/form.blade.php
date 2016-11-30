@@ -63,7 +63,7 @@
 	<div class="file-field input-field col s6">
 		<div class="btn">
 			<span>File</span>
-			{!! Form::file('file', ['id' => 'description']) !!}
+			{!! Form::file('file', ['id' => '']) !!}
 		</div>
 
 		<div class="file-path-wrapper">
@@ -78,7 +78,7 @@
 
 <div class="row">
 	<div class="col s6">
-		<button type="submit" class="btn waves-effect waves-light">Submit
+		<button type="submit" class="btn waves-effect waves-light" name="submit">Submit
 			<i class="material-icons right">send</i>
 		</button>
 	</div>

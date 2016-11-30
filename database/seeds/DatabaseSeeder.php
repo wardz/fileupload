@@ -5,6 +5,8 @@ use Illuminate\Foundation\Auth\User;
 
 class DatabaseSeeder extends Seeder
 {
+    //use DatabaseMigrations;
+
     /**
      * Run the database seeds.
      *
@@ -31,7 +33,11 @@ class DatabaseSeeder extends Seeder
             }
         });
 
-        // Create an admin user for easier testing
+        $this->createDataForTests();
+    }
+
+    public function createDataForTests()
+    {
         $user = App\User::create([
             'name' => 'admin',
             'email' => 'admin@localhost.com',
@@ -40,5 +46,14 @@ class DatabaseSeeder extends Seeder
         $user->permissions()->save(App\Permission::create([
             'role_id' => 3, 'user_id' => $user->id,
         ]));
+
+        $project = $user->projects()->save(factory(App\Project::class)->make(['name' => 'test']));
+        $project->tags()->attach([
+            rand(1, 6), rand(1, 6), rand(1, 6)
+        ]);
+
+        $project->files()->save(factory(App\File::class)->make(['project_id' => $project->id]));
+
+        App\Tag::create(['name' => 'testtag']);
     }
 }
