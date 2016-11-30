@@ -62,7 +62,7 @@ $factory->define(App\File::class, function (Faker\Generator $faker, $args) {
         'file_version' => 'v' . $faker->numberBetween(1, 9),
         'file_changelog' => $faker->paragraph,
         'file_mime' => 'application/zip',
-        'file_path' => Storage::url($name),
+        'file_path' => $id . '/' . $name,
         'file_size' => $faker->numberBetween(1024, 10240),
         'file_downloads' => $faker->randomDigit,
         // project_id

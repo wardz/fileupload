@@ -39,6 +39,7 @@
 							<a href="{!! action('DownloadController@get', $file->id) !!}">
 								<i class="material-icons circle">folder</i>
 								<span class="title">{{ $file->file_name }}</span>
+								<span class="title right">{{ $file->file_downloads }} downloads</span>
 								<p>{{ $file->file_version }}
 								<br>
 								{{ $file->file_size }}

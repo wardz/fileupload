@@ -4,6 +4,8 @@ namespace App;
 
 class File extends Model
 {
+    protected $table = 'files';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -45,6 +47,6 @@ class File extends Model
      */
     public function projects()
     {
-        return $this->belongsToMany('App\Project');
+        return $this->belongsTo('App\Project');
     }
 }
