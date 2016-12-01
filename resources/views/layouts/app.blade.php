@@ -25,6 +25,7 @@
 </head>
 <body>
     @include('layouts.nav')
+    @include('layouts.breadcrumb')
 
     <main>
         @yield('content')

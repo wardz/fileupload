@@ -5,7 +5,10 @@
         <li><a href="{!! url('/register') !!}">Register</a></li>
     @else
         <li><a href="{!! url('/settings') !!}">Settings</a></li>
-        <li><a href="#!" class="jquery-postback" data-href="{!! url('/logout') !!}" data-method="POST">Logout</a></li>
+        <li><a href="#!" class="jquery-postback"
+            data-href="{!! url('/logout') !!}"
+            data-method="POST">Logout
+        </a></li>
     @endif
 </ul>
 

@@ -70,16 +70,12 @@
 
 $(function() {
 	// Initialize materialize elements
-    $('#select_tag').material_select();
-    $(".button-collapse").sideNav();
+	$('#select_tag').material_select();
+	$(".button-collapse").sideNav();
 
-	$.ajaxSetup({
-		headers: {
-			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-		}
-	});
 
-    // Check if any inputs are invalid on page load
+
+	// Check if any inputs are invalid on page load
 	function validate() {
 		var id = $(this).attr('id');
 		var $label = $('label[for="' + id + '"]');
@@ -90,16 +86,12 @@ $(function() {
 	}
 	$('.validate').each(validate);
 
-	// Logout POST
-	$('#logout_anchor').on('click', function(event) {
-		event.preventDefault();
 
-		$.ajax({
-			url: '/logout',
-			type: 'POST'
-		}).always(function(response) {
-			window.location.replace(window.location.host + '/');
-		});
+
+	$.ajaxSetup({
+		headers: {
+			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		}
 	});
 
 	$(document).on('click', 'a.jquery-postback', function(event) {
@@ -113,6 +105,7 @@ $(function() {
 		});
 	});
 });
+
 
 /***/ }
 /******/ ]);
