@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Auth;
 
 class Project extends Model
@@ -13,6 +14,16 @@ class Project extends Model
      */
     protected $fillable = [
         'name', 'license', 'description',
+    ];
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'created_at',
+        'updated_at'
     ];
 
     /**
@@ -48,6 +59,11 @@ class Project extends Model
     public function getSlug()
     {
         return str_slug($this->name);
+    }
+
+    public function getUpdatedAtAttribute($value)
+    {
+        return Carbon::parse($value)->format('d/m/Y');
     }
 
     public function getImageAttribute() {
