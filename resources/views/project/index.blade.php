@@ -15,36 +15,43 @@
 				</div>
 			</div>
 
-			<table class="bordered highlight" style="cursor: pointer">
-				<thead>
-					<tr>
-						<th data-field="name">Name</th>
-						<th data-field="tags">Tags</th>
-						<th data-field="date">Last change</th>
-					</tr>
-				</thead>
-				<tbody>
-					@foreach($projects as $project)
-						<tr onclick="window.location = '{{ action('ProjectController@show', $project->getSlug()) }}'">
-							<td>
-								{{ $project->name }}
-							</td>
-
-							<td>
-								@foreach ($project->tag_list_name as $tag)
-									<div class="chip">
-										{{ $tag }}
-									</div>
-								@endforeach
-							</td>
-
-							<td>{{ $project->updated_at }}</td>
+			@if (isset($projects))
+				<table class="bordered highlight">
+					<thead>
+						<tr>
+							<th data-field="name">Name</th>
+							<th data-field="tags">Tags</th>
+							<th data-field="date">Last change</th>
 						</tr>
-					@endforeach
-				</tbody>
-			</table>
+					</thead>
+
+					<tbody>
+						@foreach($projects as $project)
+							<tr onclick="window.location = '{{ action('ProjectController@show', $project->getSlug()) }}'">
+								<td>
+									{{ $project->name }}
+								</td>
+
+								<td>
+									@foreach ($project->tag_list_name as $tag)
+										<div class="chip">
+											{{ $tag }}
+										</div>
+									@endforeach
+								</td>
+
+								<td>{{ $project->updated_at }}</td>
+							</tr>
+						@endforeach
+					</tbody>
+				</table>
+			@else
+				<p class="grey text-lighten-4">No projects created yet :(</p>
+			@endif
 		</div>
 
-		{!! $projects->links() !!}
+		@if (isset($projects))
+			{!! $projects->links() !!}
+		@endif
 	</div>
 @endsection

@@ -7,7 +7,8 @@
 	<div class="container">
 		@if ($project->userOwned())
 			<div class="left">
-				<a class="btn-floating btn-large waves-effect waves-light red" href="{{ action('ProjectController@edit', $project->getSlug()) }}">
+				<a class="btn-floating btn-large waves-effect waves-light red"
+					href="{{ action('ProjectController@edit', $project->getSlug()) }}">
 					<i class="material-icons">mode_edit</i>
 				</a>
 			</div>
@@ -21,7 +22,11 @@
 					</div>
 
 					<div class="card-content">
-						<span class="card-title">{{ $project->name }}<small class="right">{{ $project->user->name }}</small></span>
+						<span class="card-title">
+							{{ $project->name }}
+							<small class="right">{{ $project->user->name }}</small>
+						</span>
+
 						<p>{{ $project->description }}</p>
 					</div>
 
@@ -36,13 +41,15 @@
 				<ul class="collection col s12 m4">
 					@foreach ($project->files->all() as $file)
 						<li class="collection-item avatar">
-							<a href="{!! action('DownloadController@get', $file->id) !!}">
+							<a href="{{ action('DownloadController@get', $file->id) }}">
 								<i class="material-icons circle">folder</i>
+
 								<span class="title">{{ $file->file_name }}</span>
 								<span class="title right">{{ $file->file_downloads }} downloads</span>
-								<p>{{ $file->file_version }}
-								<br>
-								{{ $file->file_size }}
+								<p>
+									{{ $file->file_version }}
+									<br>
+									{{ $file->file_size }}
 								</p>
 							</a>
 						</li>
