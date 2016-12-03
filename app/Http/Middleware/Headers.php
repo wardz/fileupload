@@ -37,11 +37,14 @@ class Headers
      */
     public function handle($request, Closure $next, $cacheOff = false)
     {
+        $response = $next($request);
         if (env('APP_ENV') === 'testing') {
-            return $next($request);
+            return $response;
+        } elseif (!isset($response->header)) {
+            // BinaryFileResponse (download) doesn't have header method
+            return $response;
         }
 
-        $response = $next($request);
         $cacheOff = $cacheOff ? $cacheOff : isset($this->except[$request->path()]);
 
         foreach ($this->headers as $key => $value) {

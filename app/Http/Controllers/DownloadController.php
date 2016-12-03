@@ -8,10 +8,14 @@ use Storage;
 
 class DownloadController extends Controller
 {
-    public function get($id)
+    public function __construct()
     {
-        $file = File::findOrFail($id); // tmp
-        $path = storage_path() . '/app/files/' . $file->file_path;
+        $this->middleware('throttle:30,1');
+    }
+
+    public function get(File $file)
+    {
+        $path = storage_path('app/files/' . $file->file_path);
 
         // Flush any existing buffers to prevent file corruption
         if (ob_get_level()) {
@@ -22,6 +26,6 @@ class DownloadController extends Controller
         $file->update();
         
         return response()->download($path, $file->file_name,
-            array('Content-Type: ' . $file->file_mime));
+            ['Content-Type: ' . $file->file_mime]);
     }
 }

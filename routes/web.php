@@ -19,7 +19,7 @@ Route::pattern('id', '[0-9]+');
 Route::resource('project', 'ProjectController');
 Route::get('projects', 'ProjectBrowseController@index');
 
-Route::get('download/{id}', 'DownloadController@get');
+Route::get('download/{fileID}', 'DownloadController@get');
 
 Route::get('/', function() {
 	return 'test';

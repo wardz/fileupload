@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
 use App\Project;
+use App\File;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -30,6 +31,10 @@ class RouteServiceProvider extends ServiceProvider
         // Find Project by name (slug)
         Route::bind('project', function($name) {
             return Project::remember(10)->where('name', '=', str_slug($name, ' '))->firstOrFail();
+        });
+
+        Route::bind('fileID', function($id) {
+            return File::remember(10)->findOrFail($id);
         });
 
         /*Route::filter('sortBy', function($route, $request, $values) {
