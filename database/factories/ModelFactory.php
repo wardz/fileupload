@@ -28,8 +28,10 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Permission::class, function (Faker\Generator $faker) {
+    $roles = config('roles');
+
     return [
-        'role_name' => $faker->word
+        'role_name' => $roles[rand(0, count($roles)-1)]
         // user_id
     ];
 });

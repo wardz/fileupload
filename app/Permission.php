@@ -11,6 +11,11 @@ class Permission extends Model
 	 */
 	protected $table = 'permissions';
 
+	public function getRoles()
+	{
+		return config('roles');
+	}
+
 	/**
 	 * Get users associated with the given permission.
 	 *
