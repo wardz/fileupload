@@ -1,0 +1,18 @@
+!!Important
+- Add more test cases. (+ use DatabaseMigrations; support)
+- Fix JS ajax not redirecting on logout.
+- Test/finish ProjectController@destroy.
+- Test/finish DownloadController.
+- Create ProjectBrowseController.
+- Add image upload to project.
+
+
+
+- Add SettingsController.
+- Add scroll to files display on ProjectController@show.
+- Remove max-width for cards.
+- Remove unused css & fonts.
+- Change background colors from red.
+- Change views\auth\passwords to materialize instead of bootstrap.
+- Remove Laravel providers, aliases, etc not needed.
+- Go through config.
