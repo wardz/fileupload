@@ -27,6 +27,11 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function hasRole($role)
+    {
+        return $this->permissions->role_name === $role;
+    }
+
     /**
      * Get projects belonging to user.
      * 

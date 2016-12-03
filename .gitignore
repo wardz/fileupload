@@ -15,7 +15,7 @@ Homestead.yaml
 *.o
 *.so
 
-# Packages #
+# Packages (except .zip) #
 *.7z
 *.dmg
 *.gz
@@ -23,7 +23,6 @@ Homestead.yaml
 *.jar
 *.rar
 *.tar
-*.zip
 
 # Logs and databases #
 *.log

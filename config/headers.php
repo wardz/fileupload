@@ -26,6 +26,8 @@ return [
 
 	/*
 	'Strict-Transport-Security' => 'max-age=31536000; preload',
-	'Public-Key-Pins' => 'pin-sha256="' . env('PUBLIC_KEY_PINS', '') .'"; max-age="5184000"; includeSubDomains',*/
+	'Public-Key-Pins' => 'pin-sha256="' . env('PUBLIC_KEY_PIN1', '') .'";
+        pin-sha256="' . env('PUBLIC_KEY_PIN2', '') .'"; max-age="5184000"; includeSubDomains',
+    */
 
 ];

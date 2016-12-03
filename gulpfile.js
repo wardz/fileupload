@@ -15,7 +15,8 @@ elixir.config.sourcemaps = false;
 
 elixir((mix) => {
     mix.sass('app.scss')
-       .webpack('app.js');
+       .copy('resources/assets/js/app.js', 'public/js/app.js');
 
+    //mix.scripts(['script1.js', 'script2.js'])
     //mix.version('public/css/app.css');
 });

@@ -46,7 +46,7 @@ class ProjectFormRequest extends FormRequest
 
         if ($this->isMethod('patch')) {
             // Prevent "Name is already taken" when updating project. (unique)
-            $rules['name'] = $rules['name'] .  ',' . $this->route('project')->id;
+            $rules['name'] .= ',' . $this->route('project')->id;
             
             // File is optional when updating a project
             $rules['file'] = str_replace('required|', '', $rules['file']);
@@ -56,7 +56,7 @@ class ProjectFormRequest extends FormRequest
     }
 
     /** 
-     * Intercept request before passing to controller and inject any file properties.
+     * Intercept request before passing to controller and inject file properties.
      */
     public function all()
     {

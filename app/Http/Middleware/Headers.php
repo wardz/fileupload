@@ -9,13 +9,12 @@ class Headers
     protected $headers;
 
     /**
-     * The URIs that should have cache off.
+     * The URIs that should have cache & index off.
      *
      * @var array
      */
     protected $except = [
         'login',
-        'register',
         'password',
         'password/reset',
     ];
@@ -23,7 +22,8 @@ class Headers
     /**
      * Load headers on middleware created.
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->headers = config('headers');
     }
 

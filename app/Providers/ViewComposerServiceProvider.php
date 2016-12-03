@@ -21,6 +21,13 @@ class ViewComposerServiceProvider extends ServiceProvider
             $view->with('tags', Tag::remember(10)->pluck('name', 'id')->all());
         });
 
+        view()->composer('layouts.breadcrumb', function($view) {
+            $view->with([
+                'url' => url('/'),
+                config('breadcrumb.blacklist')
+            ]);
+        });
+
         /*view()->composer('project.index', function($view) {
             $view->with('projects', Tag::remember(10)->pluck('name', 'id')->all());
         });*/

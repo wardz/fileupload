@@ -61,11 +61,17 @@ class Project extends Model
         return str_slug($this->name);
     }
 
+    /**
+     * Get human-readable time (formated) when a project was updated.
+     * @param  string $value
+     * @return static [Carbon instance]
+     */
     public function getUpdatedAtAttribute($value)
     {
         return Carbon::parse($value)->format('d/m/Y');
     }
 
+    // temp
     public function getImageAttribute() {
         // return $this->image ? $this->image : config('project.stockimg');
         return config('project.stockimg');

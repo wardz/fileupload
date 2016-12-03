@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 
+use App\User;
 use Auth;
 
 class LoginController extends Controller
@@ -38,7 +39,6 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest', ['except' => 'logout']);
-        $this->middleware('headers:true');
     }
 
     /**
@@ -58,15 +58,22 @@ class LoginController extends Controller
         ]);
     }
 
-   /* protected function storeUserIp($request)
-    {   
-        Auth::user()->update(['ip_address' => $request->ip()]);
-    }*/
+    /**
+     * Store user's IP address in DB.
+     * 
+     * @param  \Illuminate\Http\Request  $request
+     */
+    protected function storeUserIp($request)
+    {
+        $user = User::findOrFail(Auth::id());
+        $user->ip_address = $request->ip();
+        $user->save();
+    }
 
     /**
      * Handle a login request to the application.
-     * This function replaces AuthenticatesUsers login() function
-     * to add validator support for recaptcha.
+     * This function is a copy of AuthenticatesUsers login() function
+     * but with captcha & ip storage support.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -85,7 +92,7 @@ class LoginController extends Controller
         }
 
         if ($this->attemptLogin($request)) {
-            //$this->storeUserIp($request);
+            $this->storeUserIp($request);
             return $this->sendLoginResponse($request);
         }
 

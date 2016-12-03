@@ -29,7 +29,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Permission::class, function (Faker\Generator $faker) {
     return [
-        'role_id' => $faker->numberBetween(0, 3)
+        'role_name' => $faker->word
         // user_id
     ];
 });
@@ -62,9 +62,10 @@ $factory->define(App\File::class, function (Faker\Generator $faker, $args) {
         'file_version' => 'v' . $faker->numberBetween(1, 9),
         'file_changelog' => $faker->paragraph,
         'file_mime' => 'application/zip',
-        'file_path' => $id . '/' . $name,
         'file_size' => $faker->numberBetween(1024, 10240),
         'file_downloads' => $faker->randomDigit,
+        // $name here should really be an UUID, but just for testing this'll do for now
+        'file_path' => $id . '/' . $name,
         // project_id
     ];
 });

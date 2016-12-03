@@ -31,7 +31,7 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
 
-            //'headers'
+            'headers'
         ],
 
         'api' => [
@@ -55,7 +55,7 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
 
-        'role' => \App\Http\Middleware\Role::class,
+        'role' => \App\Http\Middleware\CheckRole::class,
         'headers' => \App\Http\Middleware\Headers::class
     ];
 }

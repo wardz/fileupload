@@ -37,9 +37,13 @@ class CreateFilesTable extends Migration
     public function down()
     {
         Schema::dropIfExists('files');
-        
-        self::rrmdir(storage_path() . '/app/files/');
-        mkdir(storage_path() . '/app/files/', 0755);
+
+        // Delete whole directory, then create new dir with same path
+        // This is used to delete all dummy .zip files used for testing
+        $path = storage_path() . '/app/files/';
+        self::rrmdir($path);
+        mkdir($path, 0777);
+        chmod($path, 0777);
     }
 
     /**

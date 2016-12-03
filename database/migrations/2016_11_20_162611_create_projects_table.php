@@ -18,8 +18,8 @@ class CreateProjectsTable extends Migration
             $table->string('name', 32)->unique();
             $table->string('license', 50)->default('All rights reserved.');
             $table->text('description');
-            $table->integer('downloads')->unsigned()->default(0);   
-            $table->tinyInteger('public')->unsigned()->default(0);
+            $table->integer('downloads')->unsigned()->default(0);
+            $table->tinyInteger('public')->unsigned()->default(1);
             $table->integer('user_id')->unsigned();
             $table->timestamps();
 

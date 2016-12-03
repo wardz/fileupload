@@ -15,9 +15,11 @@ class CreatePermissionsTable extends Migration
     {
         Schema::create('permissions', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('role_id');
-            $table->integer('user_id')->unique();
+            $table->string('role_name', 20);
+            $table->integer('user_id')->unsigned()->unique();
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

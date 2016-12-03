@@ -33,10 +33,13 @@ class DatabaseSeeder extends Seeder
             }
         });
 
-        $this->createDataForTests();
+        $this->createDataForManualTesting();
     }
 
-    public function createDataForTests()
+    /**
+     * Create a dummy administrator user for easier manual testing.
+     */
+    public function createDataForManualTesting()
     {
         $user = App\User::create([
             'name' => 'admin',
@@ -44,7 +47,7 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('admin'),
         ]);
         $user->permissions()->save(App\Permission::create([
-            'role_id' => 3, 'user_id' => $user->id,
+            'role_name' => 'admin', 'user_id' => $user->id,
         ]));
 
         $project = $user->projects()->save(factory(App\Project::class)->make(['name' => 'test']));

@@ -4,16 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class Role
+class CheckRole
 {
-    // TODO set in config
-    protected $roles = [
-        'banned' => 0,
-        'default' => 1,
-        'moderator' => 2,
-        'admin' => 3,
-    ];
-
     /**
      * Handle an incoming request.
      *
@@ -24,7 +16,7 @@ class Role
     public function handle($request, Closure $next, $roleType = '')
     {
         if ($roleType !== 'owner') {
-            return ($request->user()->hasRole($this->roles[$roleType])) ? $next($request) : redirect('/');
+            return ($request->user()->hasRole($roleType)) ? $next($request) : redirect('/');
         } else {
             return $request->project->userOwned() ? $next($request) : redirect('/');
         }

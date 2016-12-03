@@ -4,6 +4,11 @@ namespace App;
 
 class File extends Model
 {
+    /**
+     * Name of DB table to use.
+     *
+     * @var string
+     */
     protected $table = 'files';
 
     /**
