@@ -44,6 +44,12 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if ($exception instanceof \Illuminate\Session\TokenMismatchException) {
+            return back()
+                ->withInput($request->except('password'))
+                ->withErrors('Your session timed out. Please submit the form again.');
+        }
+
         return parent::render($request, $exception);
     }
 
