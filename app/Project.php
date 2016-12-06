@@ -67,13 +67,13 @@ class Project extends Model
      * @param  string $value
      * @return static [Carbon instance]
      */
-    public function getUpdatedAtAttribute($value)
+    protected function getUpdatedAtAttribute($value)
     {
         return Carbon::parse($value)->format('d/m/Y');
     }
 
     // temp
-    public function getImageAttribute() {
+    protected function getImageAttribute() {
         // return $this->image ? $this->image : config('project.stockimg');
         return config('project.stockimg');
     }
@@ -83,7 +83,7 @@ class Project extends Model
      *
      * @return array
      */
-    public function getTagListAttribute()
+    protected function getTagListAttribute()
     {
         return $this->tags->pluck('id')->all();
     }
@@ -93,7 +93,7 @@ class Project extends Model
      *
      * @return array
      */
-    public function getTagListNameAttribute()
+    protected function getTagListNameAttribute()
     {
         return $this->tags->pluck('name')->all();
     }

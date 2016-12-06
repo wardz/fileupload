@@ -40,7 +40,7 @@ class Headers
         $response = $next($request);
 
         if (!isset($response->header)) {
-            // Certain \Response's doesn't have header method
+            // Certain \Response objects doesn't have header method
             return $response;
         }
 

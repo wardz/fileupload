@@ -13,12 +13,12 @@ $(function() {
 	/**
 	 * Temporarily disable button on click to prevent sending
 	 * any unnecessary requests.
-	 * 
+	 *
 	 * @param Event event
 	 */
 	$(document).on('click', 'button', function(event) {
 		var self = $(this);
-		
+
 		// Async disable to make form submit work
 		setTimeout(function() {
 			self.attr('disabled', 'disabled');
@@ -70,28 +70,49 @@ $(function() {
 	});
 });
 
-$(document).on('change', '.tag-select', function(event) {
-	var route = window.location.href;
-	var tag;
+function getCurrentRoute() {
+	var location = window.location.href;
+	return location.substr(0, location.lastIndexOf('/') + 1);
+}
 
-	if (route.indexOf('/all') !== -1) {
-		route = route.replace('/all', '/');
-		tag = $(this).attr('id');
-	} else {
-		tag = ',' + $(this).attr('id');
+function getRouteParams() {
+	var location = window.location.href;
+	var params = location.substr(location.lastIndexOf('/') + 1, location.length);
+	var query;
+
+	if (params.indexOf('?page=') !== -1) {
+		var index = params.indexOf('?page=');
+		// Store query string in new var
+		query = params.substr(index, params.length);
+		// Delete query string from params var
+		params = params.substr(0, index);
+	}
+
+	return {
+		tags: params.split(','),
+		query: query
+	}
+}
+
+$(document).on('change', '.tag-select', function(event) {
+	var route = getCurrentRoute();
+	var params = getRouteParams();
+
+	// Remove 'all' param once a tag has been selected
+	if (this.checked && params.tags[0] === 'all') {
+		params.tags[0] = '';
+	} else if (params.tags.length <= 0) {
+		// Re-add 'all' param if no tags are selected again
+		params.tags[0] = 'all';
 	}
 
 	if (this.checked) {
-		window.location.replace(route + tag);
+		params.tags.push($(this).attr('id'));
 	} else {
-		if (route.indexOf(tag) !== -1) {
-			window.location.replace(route.replace(tag, ''));
-		} else {
-			route = route.replace($(this).attr('id'), '');
-			if (route.slice(-1) === '/') route += 'all';
-			window.location.replace(route);
-		}
+		params.tags.splice( $.inArray($(this).attr('id'), params.tags), 1);
 	}
+
+	window.location.replace(route + params.tags.join(','));
 });
 
 // Check if any inputs are invalid on page load

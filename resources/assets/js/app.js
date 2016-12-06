@@ -13,12 +13,12 @@ $(function() {
 	/**
 	 * Temporarily disable button on click to prevent sending
 	 * any unnecessary requests.
-	 * 
+	 *
 	 * @param Event event
 	 */
 	$(document).on('click', 'button', function(event) {
 		var self = $(this);
-		
+
 		// Async disable to make form submit work
 		setTimeout(function() {
 			self.attr('disabled', 'disabled');

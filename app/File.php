@@ -32,7 +32,7 @@ class File extends Model
      * @param int $bytes
      * @return string
      */
-    public function getFileSizeAttribute($bytes)
+    protected function getFileSizeAttribute($bytes)
     {
         if ($bytes >= 1073741824) {
             return number_format($bytes / 1073741824, 2) . ' GB';

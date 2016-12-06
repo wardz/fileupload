@@ -13,16 +13,15 @@
 
 Auth::routes();
 
-Route::pattern('project', '[A-Za-z0-9-]+');
-Route::pattern('projects', '[A-Za-z0-9-,]+');
 Route::pattern('id', '[0-9]+');
+Route::patterns([
+	'project' => config('project.pattern'),
+	'projects' => config('project.pattern')
+]);
 
 Route::resource('project', 'ProjectController');
+
 Route::get('projects', 'ProjectBrowseController@index');
 Route::get('projects/{projects}', 'ProjectBrowseController@show');
 
 Route::get('download/{fileID}', 'DownloadController@get');
-
-Route::get('/', function() {
-	return 'test';
-});

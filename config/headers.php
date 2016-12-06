@@ -22,7 +22,8 @@ return [
     // support IE9+ anyways
     'X-XSS-Protection' => '1; mode=block',
 
-	'X-Powered-By' => 'REMOVE', // Delete existing header
+    // Delete existing header
+	'X-Powered-By' => 'REMOVE',
 
 	/*
 	'Strict-Transport-Security' => 'max-age=31536000; preload',

@@ -16,7 +16,6 @@ class ViewComposerServiceProvider extends ServiceProvider
     public function boot()
     {
         $duration = config('project.remember_short');
-        $blacklist = config('breadcrumb.blacklist');
 
         // Make sure these views always have $tags
         view()->composer(['project.form', 'projects.show'], function($view) use($duration) {
@@ -24,10 +23,10 @@ class ViewComposerServiceProvider extends ServiceProvider
         });
 
         // Inject config variables to breadcrumb
-        view()->composer('layouts.breadcrumb', function($view) use($blacklist) {
+        view()->composer('layouts.breadcrumb', function($view) {
             $view->with([
                 'url' => url('/'),
-                $blacklist
+                'blacklist' => [/*'login' => 1*/]
             ]);
         });
     }

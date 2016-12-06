@@ -1,14 +1,12 @@
 !!Important
+- Add Sort by in ProjectBrowseController.
 - Add more test cases. (+ use DatabaseMigrations; support)
 - Add image upload to project.
 - Exception handling.
-
-
 - Add SettingsController.
-- Add scroll to files display on ProjectController@show.
-- Remove max-width for cards.
+
+
 - Remove unused css & fonts.
-- Change background colors from red.
-- Change views\auth\passwords to materialize instead of bootstrap.
+- Change 'views\auth\passwords' to materialize instead of bootstrap.
 - Remove Laravel providers, aliases, etc not needed.
 - Go through config.

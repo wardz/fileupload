@@ -26,8 +26,11 @@ main {
 	flex: 1 0 auto;
 }
 
-/* Align nav to certain position */
-@media (min-width:993px) {
+a {
+	color: inherit;
+}
+
+@media (min-width: $medium-screen-up) {
 	nav .nav-wrapper {
 		margin-left: 15%
 	}
@@ -36,12 +39,8 @@ main {
 	margin-left: 10rem;
 }
 
-a {
-	color: inherit;
-}
-
 .breadcrumb-nav {
-	background-color: #8c5c5c;
+	background-color: color("light-blue", "darken-2");
 	height: 40px;
 	line-height: 40px;
 }

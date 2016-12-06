@@ -8,6 +8,8 @@ return [
 	'remember_short' => 10,
 	'remember_long' => 30,
 
+	'pattern' => '[A-Za-z0-9-,]+',
+
 	// validator rules?
 	// permission required to post?
 ];

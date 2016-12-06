@@ -20,10 +20,10 @@
         <a href="#nav_mobile" data-activates="nav_mobile" class="button-collapse">
             <i class="material-icons">menu</i>
         </a>
-        
+
         <ul class="hide-on-med-and-down nav-left-align">
             @include('layouts.menu')
-            
+
             <li>
                 <a class="dropdown-button" href="#!" data-activates="dropdown_nav_menu">
                     {{ Auth::guest() ? 'Account' : Auth::user()->name }}
@@ -37,4 +37,3 @@
         </ul>
     </div>
 </nav>
-          

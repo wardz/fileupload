@@ -16,7 +16,7 @@ class CheckRole
     public function handle($request, Closure $next, $roleType = '')
     {
         if ($roleType !== 'owner') {
-            return ($request->user()->hasRole($roleType)) ? $next($request) : redirect('/');
+            return $request->user()->hasRole($roleType) ? $next($request) : redirect('/');
         } else {
             return $request->project->userOwned() ? $next($request) : redirect('/');
         }

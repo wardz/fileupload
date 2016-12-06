@@ -34,7 +34,9 @@ class RouteServiceProvider extends ServiceProvider
 
         // Find Project by name (slug)
         Route::bind('project', function($name) use($duration) {
-            return Project::remember($duration)->where('name', '=', str_slug($name, ' '))->firstOrFail();
+            return Project::remember($duration)
+                ->where('name', '=', str_slug($name, ' '))
+                ->firstOrFail();
         });
 
         Route::bind('fileID', function($id) use($duration) {
@@ -46,9 +48,11 @@ class RouteServiceProvider extends ServiceProvider
                 return Project::remember($duration)->paginate($offset);
             }
 
-            return Project::remember($duration)->whereHas('tags', function($q) use ($tags) {
-                $q->whereIn('name', str_getcsv($tags));
-            })->paginate($offset);
+            // Find project(s) by tag name(s)
+            return Project::remember($duration)
+                ->whereHas('tags', function($q) use ($tags) {
+                    $q->whereIn('name', str_getcsv($tags));
+                })->paginate($offset);
         });
 
         /*Route::filter('sortBy', function($route, $request, $values) {

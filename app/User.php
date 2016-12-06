@@ -40,6 +40,27 @@ class User extends Authenticatable
     }
 
     /**
+     * Format binary IP address to human-readable string representation.
+     *
+     * @param VARBINARY $value
+     * @return string
+     */
+    protected function getIpAddressAttribute($value)
+    {
+        return inet_ntop($value);
+    }
+
+    /**
+     * Format default IP address string to 32 or 128bit binary structure.
+     *
+     * @param string $value
+     */
+    protected function setIpAddressAttribute($value)
+    {
+        $this->attributes['ip_address'] = inet_pton($value);
+    }
+
+    /**
      * Get projects belonging to user.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -57,26 +78,5 @@ class User extends Authenticatable
     public function permissions()
     {
         return $this->hasOne('App\Permission', 'user_id');
-    }
-
-    /**
-     * Format binary IP address to human-readable string representation.
-     *
-     * @param VARBINARY $value
-     * @return string
-     */
-    public function getIpAddressAttribute($value)
-    {
-        return inet_ntop($value);
-    }
-
-    /**
-     * Format default IP address string to 32 or 128bit binary structure.
-     *
-     * @param string $value
-     */
-    public function setIpAddressAttribute($value)
-    {
-        $this->attributes['ip_address'] = inet_pton($value);
     }
 }
