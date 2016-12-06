@@ -10,3 +10,9 @@
 function isActiveUrl($url) {
 	return (URL::current() === URL::to($url)) ? 'active' : '';
 }
+
+function isChecked($tag) {
+	$segments = Request::segments();
+
+	return (strpos($segments[count($segments) - 1], $tag)) !== false;
+}

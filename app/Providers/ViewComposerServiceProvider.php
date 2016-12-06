@@ -19,7 +19,7 @@ class ViewComposerServiceProvider extends ServiceProvider
         $blacklist = config('breadcrumb.blacklist');
 
         // Make sure these views always have $tags
-        view()->composer(['project.form', 'projects.index'], function($view) use($duration) {
+        view()->composer(['project.form', 'projects.index', 'projects.show'], function($view) use($duration) {
             $view->with('tags', Tag::remember($duration)->pluck('name', 'id')->all());
         });
 

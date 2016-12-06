@@ -14,7 +14,7 @@
 Auth::routes();
 
 Route::pattern('project', '[A-Za-z0-9-]+');
-Route::pattern('projects', '[A-Za-z0-9-]+');
+Route::pattern('projects', '[A-Za-z0-9-,]+');
 Route::pattern('id', '[0-9]+');
 
 Route::resource('project', 'ProjectController');

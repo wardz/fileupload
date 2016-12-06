@@ -7,7 +7,7 @@ $.ajaxSetup({
 
 $(function() {
 	// Initialize Materialize elements
-	$('#select_tag').material_select();
+	$('select').material_select();
 	$(".button-collapse").sideNav();
 
 	// Check if any inputs are invalid on page load
@@ -32,9 +32,32 @@ $(function() {
 		}, 3000);
 	});
 
+	$(document).on('change', '.tag-select', function(event) {
+		var route = window.location.href;
+		var tag;
+
+		if (route.indexOf('/all') !== -1) {
+			route = route.replace('/all', '/');
+			tag = $(this).attr('id');
+		} else {
+			tag = ',' + $(this).attr('id');
+		}
+
+		if (this.checked) {
+			window.location.replace(route + tag);
+		} else {
+			if (route.indexOf(tag) !== -1) {
+				window.location.replace(route.replace(tag, ''));
+			} else {
+				route = route + 'all';
+				window.location.replace(route.replace($(this).attr('id'), ''));
+			}
+		}
+	});
+
 	/**
 	 * Add ajax request to <a> tags with certain classname.
-	 * 
+	 *
 	 * @param Event event
 	 */
 	$(document).on('click', 'a.jquery-postback', function(event) {
@@ -43,7 +66,7 @@ $(function() {
 		if (self.isPending) return;
 		self.isPending = true;
 
-		$spinner = $('<div class="progress"><div class="indeterminate"></div></div>');		
+		$spinner = $('<div class="progress"><div class="indeterminate"></div></div>');
 		$spinner.insertAfter(self);
 
 		$.ajax({
