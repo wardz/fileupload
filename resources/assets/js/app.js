@@ -6,6 +6,8 @@ $.ajaxSetup({
 });
 
 $(function() {
+	'use strict';
+
 	// Initialize Materialize elements
 	$('select').material_select();
 	$(".button-collapse").sideNav();

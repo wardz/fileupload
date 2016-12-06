@@ -6,6 +6,8 @@ $.ajaxSetup({
 });
 
 $(function() {
+	'use strict';
+
 	// Initialize Materialize elements
 	$('select').material_select();
 	$(".button-collapse").sideNav();
@@ -70,58 +72,67 @@ $(function() {
 	});
 });
 
-function getCurrentRoute() {
-	var location = window.location.href;
-	return location.substr(0, location.lastIndexOf('/') + 1);
-}
+(function() {
+	'use strict';
 
-function getRouteParams() {
-	var location = window.location.href;
-	var params = location.substr(location.lastIndexOf('/') + 1, location.length);
-	var query;
-
-	if (params.indexOf('?page=') !== -1) {
-		var index = params.indexOf('?page=');
-		// Store query string in new var
-		query = params.substr(index, params.length);
-		// Delete query string from params var
-		params = params.substr(0, index);
+	function getCurrentRoute() {
+		var location = window.location.href;
+		return location.substr(0, location.lastIndexOf('/') + 1);
 	}
 
-	return {
-		tags: params.split(','),
-		query: query
-	}
-}
+	function getRouteParams() {
+		var location = window.location.href;
+		var params = location.substr(location.lastIndexOf('/') + 1, location.length);
+		var query;
 
-$(document).on('change', '.tag-select', function(event) {
-	var route = getCurrentRoute();
-	var params = getRouteParams();
+		if (params.indexOf('?page=') !== -1) {
+			var index = params.indexOf('?page=');
+			// Store query string in new var
+			query = params.substr(index, params.length);
+			// Delete query string from params var
+			params = params.substr(0, index);
+		}
 
-	// Remove 'all' param once a tag has been selected
-	if (this.checked && params.tags[0] === 'all') {
-		params.tags[0] = '';
-	} else if (params.tags.length <= 0) {
-		// Re-add 'all' param if no tags are selected again
-		params.tags[0] = 'all';
-	}
-
-	if (this.checked) {
-		params.tags.push($(this).attr('id'));
-	} else {
-		params.tags.splice( $.inArray($(this).attr('id'), params.tags), 1);
+		return {
+			tags: params.split(','), // csv to array
+			query: query
+		}
 	}
 
-	window.location.replace(route + params.tags.join(','));
-});
+	$(document).on('change', '.tag-select', function(event) {
+		var route = getCurrentRoute();
+		var params = getRouteParams();
 
-// Check if any inputs are invalid on page load
-function validate() {
-	var id = $(this).attr('id');
-	var $label = $('label[for="' + id + '"]');
+		// Remove 'all' param once a tag has been selected
+		if (this.checked && params.tags[0] === 'all') {
+			params.tags[0] = '';
+		} else if (params.tags.length <= 0) {
+			// Re-add 'all' param if no tags are selected again
+			params.tags[0] = 'all';
+		}
 
-	if ($label && $label.data('error')) {
-		$(this).addClass('invalid');
+		if (this.checked) {
+			params.tags.push($(this).attr('id'));
+		} else {
+			// Remove tag from array
+			params.tags.splice( $.inArray($(this).attr('id'), params.tags), 1);
+		}
+
+		window.location.replace(route + params.tags.join(',')); // array to csv
+	});
+})();
+
+(function() {
+	'use strict';
+
+	// Check if any inputs are invalid on page load
+	function validate() {
+		var id = $(this).attr('id');
+		var $label = $('label[for="' + id + '"]');
+
+		if ($label && $label.data('error')) {
+			$(this).addClass('invalid');
+		}
 	}
-}
-$('.validate').each(validate);
+	$('.validate').each(validate);
+})();
