@@ -1,7 +1,7 @@
 !!Important
 - Add more test cases. (+ use DatabaseMigrations; support)
 - Add image upload to project.
-- Exception handling for client.
+- Exception handling.
 
 
 - Add SettingsController.

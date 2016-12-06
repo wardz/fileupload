@@ -17,9 +17,9 @@ class ProjectController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('throttle:10,1', ['except' => ['show']]);
+        $this->middleware('throttle:20,1', ['except' => ['show']]);
     	$this->middleware('auth', ['except' => ['show']]);
-        $this->middleware('role:owner', ['only' => ['edit']]);
+        $this->middleware('role:owner', ['only' => ['edit', 'update', 'destroy']]);
     }
 
     /**
