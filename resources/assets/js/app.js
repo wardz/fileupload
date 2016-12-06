@@ -55,6 +55,16 @@ $(function() {
 		}
 	});
 
+	$('#projects-show-btn').click(function() {
+		var $ele = $('#projects-widgets');
+		console.log($ele);
+		if ($ele.is(':visible')) {
+			$ele.addClass('hide-on-small-only');
+		} else {
+			$ele.removeClass('hide-on-small-only');
+		}
+	});
+
 	/**
 	 * Add ajax request to <a> tags with certain classname.
 	 *

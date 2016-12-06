@@ -45,3 +45,18 @@ a {
 	height: 40px;
 	line-height: 40px;
 }
+
+@media screen and (max-width: $small-screen) {
+	#projects-widgets {
+		display: inline-block;
+		float: none !important;
+	}
+}
+
+@media screen and (min-width: $small-screen-up) {
+	.scroll-on-med-and-up {
+		overflow: scroll;
+		overflow-x: hidden;
+		height: 700px;
+	}
+}

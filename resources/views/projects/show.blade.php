@@ -10,7 +10,11 @@
 		{!! $projects->links() !!}
 
 		<div class="row">
-			<div class="col m4 right">
+			<button class="waves-effect waves-light btn hide-on-med-and-up" id="projects-show-btn">Show options</button>
+		</div>
+
+		<div class="row">
+			<div class="col s12 m4 right hide-on-small-only" id="projects-widgets">
 				<div class="input-field">
 					<select>
 						<option value="1" selected>Date</option>
@@ -35,10 +39,11 @@
 				</div>
 			</div>
 
-			<div style="overflow:scroll; overflow-x:hidden; height:700px;">
+
+			<div class="scroll-on-med-and-up">
 				@foreach ($projects as $project)
 					<div class="row">
-						<div class="col s6">
+						<div class="col s11 m11">
 							<h2 class="header">{{ $project->name }}</h2>
 							<div class="card horizontal">
 								<div class="card-image">
