@@ -14,5 +14,5 @@ function isActiveUrl($url) {
 function isChecked($tag) {
 	$segments = Request::segments();
 
-	return (strpos($segments[count($segments) - 1], $tag)) !== false;
+	return preg_match("/$tag\b/i", $segments[count($segments)-1]);
 }
