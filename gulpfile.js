@@ -14,8 +14,9 @@ const elixir = require('laravel-elixir');
 elixir.config.sourcemaps = false;
 
 elixir((mix) => {
-    mix.sass('app.scss')
-       .copy('resources/assets/js/app.js', 'public/js/app.js');
+		mix.sass('app.scss')
+		.scripts(['app.js', 'tagselect.js', 'validate.js']);
+       //.copy('resources/assets/js/app.js', 'public/js/app.js');
 
     //mix.scripts(['script1.js', 'script2.js'])
     //mix.version('public/css/app.css');
