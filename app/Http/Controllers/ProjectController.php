@@ -24,7 +24,7 @@ class ProjectController extends Controller
 
     /**
      * Show view for creating a new project.
-     * 
+     *
      * @return Response
      */
     public function create()
@@ -34,7 +34,7 @@ class ProjectController extends Controller
 
     /**
      * Show view for listing all of user's projects.
-     * 
+     *
      * @param  App\Project $projects
      * @return Response
      */
@@ -42,7 +42,7 @@ class ProjectController extends Controller
     {
         // tmp
         $projects = Project::userIsOwner()->orderBy('name', 'asc')->paginate(8);
-        
+
         return view('project.index', compact('projects'));
     }
 
@@ -59,7 +59,7 @@ class ProjectController extends Controller
 
     /**
      * Show view for current project.
-     * 
+     *
      * @param  Project $project
      * @return Response
      */
@@ -70,7 +70,7 @@ class ProjectController extends Controller
 
     /**
      * Helper function for storing file locally.
-     * 
+     *
      * @param  ProjectFormRequest $request
      * @param int $id
      * @return string|null
@@ -146,10 +146,10 @@ class ProjectController extends Controller
                 Storage::delete($path);
             }
         }
-        
+
         //$project->tags()->delete();
         //$project->files()->delete();
-        
+
         $project->delete();
 
         return response()->json([

@@ -25,7 +25,7 @@ class File extends Model
         'file_size'
     ];
 
-    /** 
+    /**
      * Mutate file_size to return formatted human-readable size. E.g 1024 to 1 kB.
      * http://stackoverflow.com/questions/5501427/php-filesize-mb-kb-conversion
      *
@@ -33,7 +33,7 @@ class File extends Model
      * @return string
      */
     public function getFileSizeAttribute($bytes)
-    {        
+    {
         if ($bytes >= 1073741824) {
             return number_format($bytes / 1073741824, 2) . ' GB';
         } elseif ($bytes >= 1048576) {

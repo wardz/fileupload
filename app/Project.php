@@ -28,7 +28,7 @@ class Project extends Model
 
     /**
      * Check if user is owner of project in query.
-     * 
+     *
      * @param  [type] $query [description]
      */
     public function scopeUserIsOwner($query)
@@ -63,7 +63,7 @@ class Project extends Model
 
     /**
      * Get human-readable time (formated) when a project was updated.
-     * 
+     *
      * @param  string $value
      * @return static [Carbon instance]
      */
@@ -80,7 +80,7 @@ class Project extends Model
 
     /**
      * Get a list of tag ids associated with the current project.
-     * 
+     *
      * @return array
      */
     public function getTagListAttribute()
@@ -90,7 +90,7 @@ class Project extends Model
 
     /**
      * Get a list of tag names associated with the current project.
-     * 
+     *
      * @return array
      */
     public function getTagListNameAttribute()
@@ -100,7 +100,7 @@ class Project extends Model
 
     /**
      * Get relationship for User model.
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function user()
@@ -110,7 +110,7 @@ class Project extends Model
 
     /**
      * Get relationship for File model.
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function files()
@@ -120,7 +120,7 @@ class Project extends Model
 
     /**
      * Get relationship for Tag model.
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
      */
     public function tags()

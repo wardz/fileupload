@@ -38,7 +38,7 @@ class Headers
     public function handle($request, Closure $next, $cacheOff = false)
     {
         $response = $next($request);
-        
+
         if (!isset($response->header)) {
             // Certain \Response's doesn't have header method
             return $response;

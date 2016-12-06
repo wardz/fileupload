@@ -24,7 +24,7 @@ class DownloadController extends Controller
 
         $file->file_downloads += 1;
         $file->update();
-        
+
         return response()->download($path, $file->file_name,
             ['Content-Type: ' . $file->file_mime]);
     }

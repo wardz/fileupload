@@ -49,7 +49,7 @@ class CreateFilesTable extends Migration
     /**
      * Recursively delete non-empty directory.
      * http://php.net/manual/en/function.rmdir.php#98622
-     * 
+     *
      * @param  string $dir
      */
     public function rrmdir($dir) {
@@ -65,7 +65,7 @@ class CreateFilesTable extends Migration
                 }
             }
 
-            reset($objects); 
+            reset($objects);
             rmdir($dir);
         }
     }

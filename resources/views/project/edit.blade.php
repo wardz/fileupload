@@ -21,7 +21,7 @@
 			]) }}
 
 				@include('project.form')
-			
+
 			{!! Form::close() !!}
 		</div>
 	</div>

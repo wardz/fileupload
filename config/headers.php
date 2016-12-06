@@ -7,7 +7,7 @@ return [
     | Website Headers
     |--------------------------------------------------------------------------
     |
-    | These headers will be applied to every route using the headers middleware. 
+    | These headers will be applied to every route using the headers middleware.
     |
     */
 

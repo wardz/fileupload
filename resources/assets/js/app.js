@@ -34,7 +34,7 @@ $(function() {
 
 	/**
 	 * Add ajax request to <a> tags with certain classname.
-	 * 
+	 *
 	 * @param Event event
 	 */
 	$(document).on('click', 'a.jquery-postback', function(event) {
@@ -43,7 +43,7 @@ $(function() {
 		if (self.isPending) return;
 		self.isPending = true;
 
-		$spinner = $('<div class="progress"><div class="indeterminate"></div></div>');		
+		$spinner = $('<div class="progress"><div class="indeterminate"></div></div>');
 		$spinner.insertAfter(self);
 
 		$.ajax({

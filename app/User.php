@@ -29,7 +29,7 @@ class User extends Authenticatable
 
     /**
      * Check if current user has the given role.
-     * 
+     *
      * @param string $role
      * @return boolean
      */
@@ -41,7 +41,7 @@ class User extends Authenticatable
 
     /**
      * Get projects belonging to user.
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function projects()
@@ -51,7 +51,7 @@ class User extends Authenticatable
 
     /**
      * Get permission associated with given user.
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function permissions()

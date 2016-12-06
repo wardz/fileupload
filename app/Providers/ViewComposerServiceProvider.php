@@ -7,7 +7,7 @@ use Illuminate\Support\ServiceProvider;
 use App\Tag;
 
 class ViewComposerServiceProvider extends ServiceProvider
-{        
+{
     /**
      * Bootstrap the application services.
      *

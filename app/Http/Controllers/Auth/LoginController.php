@@ -50,7 +50,7 @@ class LoginController extends Controller
     private function validateLogin(Request $request)
     {
         $captchaRules = env('APP_DEBUG', false) ? '' : 'required|recaptcha';
-        
+
         $this->validate($request, [
             $this->username() => 'required',
             'password' => 'required',
@@ -60,7 +60,7 @@ class LoginController extends Controller
 
     /**
      * Store user's IP address in DB.
-     * 
+     *
      * @param  \Illuminate\Http\Request  $request
      */
     protected function storeUserIp($request)

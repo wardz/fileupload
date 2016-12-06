@@ -62,7 +62,7 @@
 			'pattern' => '.{10,999}',
 			'title' => 'Description requires minimum 10 characters and below 999 characters.',
 		]) }}
-		
+
 		<label for="description" data-error="{!! $errors->first('description') !!}">Description</label>
 	</div>
 </div>
