@@ -7,7 +7,7 @@ use Illuminate\Support\ServiceProvider;
 use App\Tag;
 
 class ViewComposerServiceProvider extends ServiceProvider
-{
+{        
     /**
      * Bootstrap the application services.
      *
@@ -15,22 +15,21 @@ class ViewComposerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $duration = config('project.remember_short');
+        $blacklist = config('breadcrumb.blacklist');
 
-        // Make sure form view always has $tags
-        view()->composer('project.form', function($view) {
-            $view->with('tags', Tag::remember(10)->pluck('name', 'id')->all());
+        // Make sure these views always have $tags
+        view()->composer(['project.form', 'projects.index'], function($view) use($duration) {
+            $view->with('tags', Tag::remember($duration)->pluck('name', 'id')->all());
         });
 
-        view()->composer('layouts.breadcrumb', function($view) {
+        // Inject config variables to breadcrumb
+        view()->composer('layouts.breadcrumb', function($view) use($blacklist) {
             $view->with([
                 'url' => url('/'),
-                config('breadcrumb.blacklist')
+                $blacklist
             ]);
         });
-
-        /*view()->composer('project.index', function($view) {
-            $view->with('projects', Tag::remember(10)->pluck('name', 'id')->all());
-        });*/
     }
 
     /**

@@ -37,7 +37,7 @@ class Project extends Model
     }
 
     /**
-     * Helper function to check if user is owner of project.
+     * Check if user is owner of project.
      *
      * @return bool
      */
@@ -63,6 +63,7 @@ class Project extends Model
 
     /**
      * Get human-readable time (formated) when a project was updated.
+     * 
      * @param  string $value
      * @return static [Carbon instance]
      */

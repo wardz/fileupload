@@ -1,3 +1,9 @@
+<?php
+	if (isset($project) && !isset($project->files)) {
+		$project->files = [];
+	}
+?>
+
 <div class="row">
 	<div class="input-field col s6">
 		{{ Form::text('name', null, [

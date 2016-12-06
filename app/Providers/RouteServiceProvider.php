@@ -7,6 +7,7 @@ use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvi
 
 use App\Project;
 use App\File;
+use App\Tag;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -28,13 +29,26 @@ class RouteServiceProvider extends ServiceProvider
     {
         parent::boot();
 
+        $duration = config('project.remember_long');
+        $offset = config('project.paginate');
+
         // Find Project by name (slug)
-        Route::bind('project', function($name) {
-            return Project::remember(10)->where('name', '=', str_slug($name, ' '))->firstOrFail();
+        Route::bind('project', function($name) use($duration) {
+            return Project::remember($duration)->where('name', '=', str_slug($name, ' '))->firstOrFail();
         });
 
-        Route::bind('fileID', function($id) {
-            return File::remember(10)->findOrFail($id);
+        Route::bind('fileID', function($id) use($duration) {
+            return File::remember($duration)->findOrFail($id);
+        });
+
+        Route::bind('projects', function($tags) use($offset, $duration) {
+            if ($tags === 'all') {
+                return Project::remember($duration)->paginate($offset);
+            }
+
+            return Project::remember($duration)->whereHas('tags', function($q) use ($tags) {
+                $q->whereIn('name', str_getcsv($tags));
+            })->paginate($offset);
         });
 
         /*Route::filter('sortBy', function($route, $request, $values) {

@@ -38,14 +38,11 @@ class Headers
     public function handle($request, Closure $next, $cacheOff = false)
     {
         $response = $next($request);
-        if (env('APP_ENV') === 'testing') {
-            return $response;
-        } elseif (!isset($response->header)) {
-            // BinaryFileResponse (download) doesn't have header method
+        
+        if (!isset($response->header)) {
+            // Certain \Response's doesn't have header method
             return $response;
         }
-
-        $cacheOff = $cacheOff ? $cacheOff : isset($this->except[$request->path()]);
 
         foreach ($this->headers as $key => $value) {
             if ($value !== 'REMOVE') {
@@ -55,7 +52,7 @@ class Headers
             }
         }
 
-        if ($cacheOff) {
+        if ($cacheOff || isset($this->except[$request->path()])) {
             $response->header('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
             $response->header('X-Robots-Tag', 'noindex, nofollow');
         }

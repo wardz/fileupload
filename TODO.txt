@@ -1,11 +1,7 @@
 !!Important
 - Add more test cases. (+ use DatabaseMigrations; support)
-- Fix JS ajax not redirecting on logout.
-- Test/finish ProjectController@destroy.
-- Test/finish DownloadController.
-- Create ProjectBrowseController.
 - Add image upload to project.
-- File download by UUID instead of ID.
+- Exception handling for client.
 
 
 - Add SettingsController.

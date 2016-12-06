@@ -21,25 +21,42 @@ $(function() {
 	}
 	$('.validate').each(validate);
 
+	$(document).on('click', 'button', function(event) {
+		var self = $(this);
+		setTimeout(function() {
+			self.attr('disabled', 'disabled');
+		}, 0);
+
+		setTimeout(function() {
+			self.removeAttr('disabled');
+		}, 3000);
+	});
+
 	/**
 	 * Add ajax request to <a> tags with certain classname.
 	 * 
 	 * @param Event event
 	 */
 	$(document).on('click', 'a.jquery-postback', function(event) {
+		var self = $(this);
 		event.preventDefault();
+		if (self.isPending) return;
+		self.isPending = true;
+
+		$spinner = $('<div class="progress"><div class="indeterminate"></div></div>');		
+		$spinner.insertAfter(self);
 
 		$.ajax({
-			url: $(this).data('href'),
-			type: $(this).data('method'),
-			dataType: 'json'
-		}).error(function(response) {
+			url: self.data('href'),
+			type: self.data('method'),
+		}).fail(function(response) {
 			alert('Failed retrieving information from server. Please try again later.');
 			console.log(response);
 		}).always(function(response) {
-			if (response.redirect) {
-				window.location.replace(response.redirect);
-			}
+			self.isPending = false;
+			$spinner.remove();
+
+			window.location.replace(response.redirect ? response.redirect : '/');
 		});
 	});
 });

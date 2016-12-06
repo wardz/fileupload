@@ -27,9 +27,16 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    /**
+     * Check if current user has the given role.
+     * 
+     * @param string $role
+     * @return boolean
+     */
     public function hasRole($role)
     {
-        return $this->permissions->role_name === $role;
+        return Auth::user()->permissions->role_name === $role;
+        //return $this->permissions->role_name === $role;
     }
 
     /**

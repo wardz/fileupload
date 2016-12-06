@@ -7,6 +7,10 @@
 		<div class="row">
 			<h3>Your projects</h3>
 
+			@if (session('status'))
+				<h5>{!! session('status') !!}</h5>
+			@endif
+
 			<div class="row">
 				<div class="col s6">
 					<a href="{{ action('ProjectController@create') }}" class="btn waves-effect waves-light">Create new

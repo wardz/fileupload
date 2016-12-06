@@ -1,11 +1,12 @@
 <?php
 
 /**
- * Check if given URL matches current route/url.
+ * Check if given URL matches current route, and return
+ * active css class name.
  * 
  * @param  string $url
- * @return boolean
+ * @return string
  */
 function isActiveUrl($url) {
-	return (URL::current() == URL::to($url)) ? 'active' : '';
+	return (URL::current() === URL::to($url)) ? 'active' : '';
 }

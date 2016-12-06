@@ -118,8 +118,9 @@ class ProjectController extends Controller
     {
         // Store project
         $project = new Project($request->all());
-        $project->tags()->attach($project->id, $request->input('tag_list'));
+        $project->tags()->attach($project->id);
         $request->user()->projects()->save($project);
+        $project->tags()->sync($request->input('tag_list'));
 
         // Store file
         $file = new File($request->all());
@@ -137,6 +138,8 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
+        // Depending on how Storage::delete works,
+        // this should probably be queued
         foreach ($project->files as $file) {
             $path = $file->file_path;
             if (Storage::exists($path)) {
@@ -144,10 +147,14 @@ class ProjectController extends Controller
             }
         }
         
-        $project->tags()->delete();
-        $project->files()->delete();
+        //$project->tags()->delete();
+        //$project->files()->delete();
+        
         $project->delete();
 
-        return redirect('project');
+        return response()->json([
+            'redirect' => '/project',
+            'status' => 'Your project has been scheduled for deletion. (10 minutes)'
+        ]);
     }
 }
